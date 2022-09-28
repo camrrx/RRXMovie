@@ -32,8 +32,8 @@ export const Search = () => {
 			<button className="btn btn-primary" onClick={search}>
 				Search
 			</button>
-			<div>{allMovies && allMovies.lenght ? console.log('Title', allMovies) : console.log('ok')}</div>
-			{/* <ListMovies moviesParam={allMovies ? allMovies : ''} /> */}
+			{/* <div>{allMovies && allMovies.lenght ? console.log('Title', allMovies) : console.log('ok')}</div> */}
+			<ListMovies moviesParam={allMovies ? allMovies : []} />
 		</div>
 	);
 };

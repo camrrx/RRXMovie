@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const ListMovies = (props) => {
-	const [ movies, setMovies ] = useState({});
+	const [movies, setMovies] = useState({});
 
 	//useEffect -> function which triggered before rendering
 	//if second parameter change, use effect will be reload
@@ -11,13 +11,15 @@ const ListMovies = (props) => {
 			setMovies(props.moviesParam);
 			console.log(props.moviesParam);
 		},
-		[ props.moviesParam ]
+		[props.moviesParam]
 	);
 
 	//let moviesTitle = Search();
 	console.log('List movies', movies);
 
-	return <div>{movies.map((movie) => (movie ? <h2>{movie.title}</h2> : ''))}</div>;
+	return (
+		<div>
+			{movies.length ? movies.map((movie) => <div>{movie.title}</div>) : ""}
+		</div>);
 };
-
 export default ListMovies;
