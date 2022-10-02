@@ -11,17 +11,24 @@
   }
 
   .poster-path{
-    width:auto;
-    height: 100%;
+    width:100%;
+    height: auto;
   }
 
   .card {
-    min-width: 200px;
-    width: 400px;
-    height: 400px;
+    max-width: 400px;
     overflow: hidden;
+    border:1px solid rgba(128, 128, 128, 0.315);
+    border-radius: 8px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    margin-bottom: 1rem;  
   }
   
+  .poster-container{
+    height: 400px;
+    width: auto;
+  }
+
   .card-bigger {
     height: 600px;
   }
@@ -40,4 +47,21 @@
   .description-container{
       height: 200px;
       padding:1rem;
+  }
+
+  .button-select{
+    border-radius: 20px;
+    height: 50px;
+    border:none;
+background: linear-gradient(90deg, rgba(0,26,61,0.9878326330532213) 0%, rgba(77,98,140,1) 100%);
+    color:white;
+    font-size: 1.2rem;
+    font-weight: 800;
+    cursor:pointer;
+  }
+
+  .button-select:hover{
+    transition:0.5sec;
+    border-radius: 40px;
+    opacity:0.9;
   }

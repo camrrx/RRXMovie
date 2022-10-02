@@ -26,10 +26,11 @@ export const Search = () => {
   };
 
   const searchFromKey = (event) => {
-    if ((event.key = "Enter")) {
+    if (event.key === "Enter") {
       search();
     }
   };
+
   return (
     <div>
       <div className="top-container">

@@ -1,10 +1,12 @@
 
 .researching{
     display: flex;
-    background-color:rgb(179, 202, 198);
+    background-color: rgb(230, 230, 230);
     border-radius: 40px;
     border:none;
     padding-inline-start:1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;  
+    outline:none;
   }
 
 .top-container{

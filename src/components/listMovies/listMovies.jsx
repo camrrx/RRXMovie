@@ -36,19 +36,22 @@ const ListMovies = (props) => {
       {movies.length
         ? filmCover().map((movie) => (
             <div className={"card" + (card ? "card-bigger" : "")}>
-              <img
-                className="poster-path"
-                src={"https://image.tmdb.org/t/p/original/" + movie.poster_path}
-                alt=""
-              />
+              <div className="poster-container">
+                <img
+                  className="poster-path"
+                  src={
+                    "https://image.tmdb.org/t/p/original/" + movie.poster_path
+                  }
+                  alt=""
+                />
+              </div>
               <div className="card-body">
-                <h5 className="card-title">{movie.title}</h5>
-                <div className="description-container">
+                {/* <div className="description-container">
                   <p onClick={() => setCard(true)} class="card-text">
                     {descriptionMovie(movie.overview)}
                   </p>
-                </div>
-                <button className="btn btn-dark">Select {movie.title}</button>
+                </div> */}
+                <button className="button-select">{movie.title}</button>
               </div>
             </div>
           ))
