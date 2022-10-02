@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Search from './components/search';
-import Menu from './components/menu';
+import Search from './components/search/search';
+import Menu from './components/menu/menu';
 
 class App extends Component {
    

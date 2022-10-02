@@ -1,0 +1,41 @@
+
+.researching{
+    display: flex;
+    background-color:rgb(179, 202, 198);
+    border-radius: 40px;
+    border:none;
+    padding-inline-start:1.5rem;
+  }
+
+.top-container{
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.research-zone{
+  display: flex;
+  gap:1rem;
+
+}
+
+.button-search{
+  height:40px;
+  width: 40px;
+  border-radius: 50%;
+  border:none;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  transition:0.4s;
+
+}
+
+.button-search:hover{
+  transition:0.4s;
+  background-color:darkslategrey;
+  color:white;
+  transform: rotate(90deg);
+}

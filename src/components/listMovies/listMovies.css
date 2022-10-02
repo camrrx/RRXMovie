@@ -1,0 +1,43 @@
+.movies-list{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border: 1px;
+    color:rgb(0, 155, 163);
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .poster-path{
+    width:auto;
+    height: 100%;
+  }
+
+  .card {
+    min-width: 200px;
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+  }
+  
+  .card-bigger {
+    height: 600px;
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 1rem ;
+  }
+  
+  .card-text {
+    cursor: pointer;
+  }
+  
+  .description-container{
+      height: 200px;
+      padding:1rem;
+  }
