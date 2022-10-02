@@ -25,14 +25,15 @@ export const Search = () => {
 	};
 
 	return (
-		<div className="input-group">
-			<div className="form-outline">
-				<input type="search" className="form-control" onChange={handleNewResearch} />
-			</div>
-			<button className="btn btn-primary" onClick={search}>
+		<div>
+			<div className="input-group">
+			<input type="search" className="researching" onChange={handleNewResearch} />
+			<div >
+				<button className="btn btn-dark" onClick={search}>
 				Search
-			</button>
-			{/* <div>{allMovies && allMovies.lenght ? console.log('Title', allMovies) : console.log('ok')}</div> */}
+				</button>
+				</div>
+			</div>
 			<ListMovies moviesParam={allMovies ? allMovies : []} />
 		</div>
 	);

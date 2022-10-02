@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import NavBar from './components/navbar';
 import './App.css';
 import Search from './components/search';
+import Menu from './components/menu';
 
 class App extends Component {
    
   render() { 
     return (
       <React.Fragment>
-        <NavBar />
+        <Menu/>
         <Search />
       </React.Fragment>
     );
