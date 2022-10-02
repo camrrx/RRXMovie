@@ -1,7 +1,7 @@
 //Stateless Functional Component (scf to create easily the function)
-import "./menu.css";
+import "./home.css";
 
-const Menu = () => {
+const Home = () => {
   return (
     <div className="menu">
       {/* <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -18,4 +18,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default Home;

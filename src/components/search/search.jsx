@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { getMovies } from "../../API/tmdbApi";
 import ListMovies from "../listMovies/listMovies";
+import { getMovieSelected } from "../listMovies/listMovies";
+import MovieNote from "../movieNote/movieNote";
 import "./search.css";
 
 export const Search = () => {
@@ -18,10 +20,8 @@ export const Search = () => {
   };
 
   const search = () => {
-    console.log(researchingMovie);
     getMovies(researchingMovie).then((movies) => {
       setAllMovies(movies);
-      console.log("movies : ", allMovies);
     });
   };
 

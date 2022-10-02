@@ -1,0 +1,33 @@
+.modal-container {
+  width: 800px;
+  height: 500px;
+  display: flex;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 26, 61, 0.9878326330532213) 0%,
+    rgba(77, 98, 140, 1) 100%
+  );
+  border-radius: 12px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  margin: 2rem;
+}
+
+.info-container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.poster {
+  height: 500px;
+  width: auto;
+  justify-content: left;
+  align-content: left;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}

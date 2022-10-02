@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import Search from './components/search/search';
-import Menu from './components/menu/menu';
+import Home from './components/home/home';
 
 class App extends Component {
    
   render() { 
     return (
       <React.Fragment>
-        <Menu/>
+        <Home/>
         <Search />
       </React.Fragment>
     );

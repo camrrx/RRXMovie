@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./listMovies.css";
+import MovieNote from "../movieNote/movieNote";
 
-const ListMovies = (props) => {
+export const ListMovies = (props) => {
   const [movies, setMovies] = useState({});
   const [card, setCard] = useState(false);
+  const [movieSelected, setMovieSelected] = useState({});
 
   //useEffect -> function which triggered before rendering
   //if second parameter change, use effect will be reload
@@ -16,46 +18,55 @@ const ListMovies = (props) => {
   //let moviesTitle = Search();
   //console.log('List movies', movies);
 
-  const descriptionMovie = (description) => {
-    if (!description) {
-      return "This movie does not have description";
-    }
-    return description.length < 280
-      ? description
-      : description.substring(0, 280) + "[...]";
-  };
-
   const filmCover = () => {
     return movies.filter((movie) => {
       return movie.poster_path;
     });
   };
 
+  const getMovieSelected = () => {
+    if (!Object.entries(movieSelected).length) {
+      return false;
+    }
+    return true;
+  };
+
   return (
-    <div className="movies-list">
-      {movies.length
-        ? filmCover().map((movie) => (
-            <div className={"card" + (card ? "card-bigger" : "")}>
-              <div className="poster-container">
-                <img
-                  className="poster-path"
-                  src={
-                    "https://image.tmdb.org/t/p/original/" + movie.poster_path
-                  }
-                  alt=""
-                />
+    <div>
+      <div className="movies-list">
+        {movies.length
+          ? filmCover().map((movie) => (
+              <div className={"card" + (card ? "card-bigger" : "")}>
+                <div className="poster-container">
+                  <img
+                    className="poster-path"
+                    src={
+                      "https://image.tmdb.org/t/p/original/" + movie.poster_path
+                    }
+                    alt=""
+                  />
+                </div>
+                <div className="card-body">
+                  <button
+                    onClick={() => {
+                      setMovieSelected(movie);
+                    }}
+                    className="button-select">
+                    {movie.title}
+                  </button>
+                </div>
               </div>
-              <div className="card-body">
-                {/* <div className="description-container">
-                  <p onClick={() => setCard(true)} class="card-text">
-                    {descriptionMovie(movie.overview)}
-                  </p>
-                </div> */}
-                <button className="button-select">{movie.title}</button>
-              </div>
-            </div>
-          ))
-        : ""}
+            ))
+          : ""}
+      </div>
+
+      {getMovieSelected() ? (
+        <div className="movie-note">
+          <MovieNote movieParam={movieSelected}></MovieNote>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

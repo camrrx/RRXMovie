@@ -12,8 +12,8 @@ export const getMovies = async (titleMovie) => {
         "&page=1&" +
         API_KEY
     );
-	  console.log(res.data.results);
-	  
+    console.log(res.data.results);
+
     return res.data.results;
   } catch (e) {
     console.log(e);
