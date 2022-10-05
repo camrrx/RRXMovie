@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./listMovies.css";
 import MovieNote from "../movieNote/movieNote";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ListMovies = (props) => {
   const [movies, setMovies] = useState({});
   const [card, setCard] = useState(false);
-  const [movieSelected, setMovieSelected] = useState({});
+  const movieSelected = useSelector((state) => state.movieSelected);
+  const isDisplay = useSelector((state) => state.isDisplay);
+  const body = document.body;
+
+  const dispatch = useDispatch();
 
   //useEffect -> function which triggered before rendering
   //if second parameter change, use effect will be reload
@@ -13,6 +18,10 @@ export const ListMovies = (props) => {
     //getting the list of movies from search component
     setMovies(props.moviesParam);
     console.log(props.moviesParam);
+
+    if (isDisplay) {
+      body.style.overflowY = "hidden";
+    }
   }, [props.moviesParam]);
 
   //let moviesTitle = Search();
@@ -22,13 +31,6 @@ export const ListMovies = (props) => {
     return movies.filter((movie) => {
       return movie.poster_path;
     });
-  };
-
-  const getMovieSelected = () => {
-    if (!Object.entries(movieSelected).length) {
-      return false;
-    }
-    return true;
   };
 
   return (
@@ -49,7 +51,14 @@ export const ListMovies = (props) => {
                 <div className="card-body">
                   <button
                     onClick={() => {
-                      setMovieSelected(movie);
+                      dispatch({
+                        type: "movieSelected/addMovie",
+                        payload: movie,
+                      });
+                      dispatch({
+                        type: "isDisplay/displayModal",
+                        payload: true,
+                      });
                     }}
                     className="button-select">
                     {movie.title}
@@ -59,8 +68,7 @@ export const ListMovies = (props) => {
             ))
           : ""}
       </div>
-
-      {getMovieSelected() ? (
+      {isDisplay ? (
         <div className="movie-note">
           <MovieNote movieParam={movieSelected}></MovieNote>
         </div>

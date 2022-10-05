@@ -13,6 +13,7 @@
   margin-bottom: 1rem;
   justify-content: space-between;
   margin: 2rem;
+  position: fixed;
 }
 
 .info-container {
@@ -21,8 +22,6 @@
   flex-direction: column;
 }
 
-
-
 .poster {
   height: 500px;
   width: auto;
@@ -30,4 +29,13 @@
   align-content: left;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
+}
+
+.button-close {
+  width: 30px;
+  height: 30px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
