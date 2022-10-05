@@ -9,7 +9,6 @@ class App extends Component {
     return (
       <React.Fragment>
         <Home/>
-        <Search />
       </React.Fragment>
     );
   }
