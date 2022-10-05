@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { getMovies } from "../../API/tmdbApi";
 import ListMovies from "../listMovies/listMovies";
-import { getMovieSelected } from "../listMovies/listMovies";
-import MovieNote from "../movieNote/movieNote";
 import "./search.css";
 
-export const Search = () => {
+const Search = () => {
   //useState is used to modify in direct a state
   //state for the researcher
   const [researchingMovie, setResearchingMovie] = useState("");
