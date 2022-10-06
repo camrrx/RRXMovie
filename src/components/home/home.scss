@@ -85,19 +85,14 @@
       color: white;
       border-radius: 40px;
       outline: none;
-      padding-inline-start: 3rem;
-      font-size: 1.4rem;
+      padding-inline-start: 1rem;
+      font-size: 3,5rem;
+    }
+    .click-start{
+      font-size: 3,5rem;
+
     }
 
-    .search-button {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
   }
+
 }

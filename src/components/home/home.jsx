@@ -1,5 +1,6 @@
 //Stateless Functional Component (scf to create easily the function)
 import "./home.scss";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const goToSearch = () => {
@@ -25,10 +26,11 @@ const Home = () => {
       </div>
       <img src={require("./interstellar.jpg")} alt="interstellar" />
       <form className="search-container">
-        <input className="search-input" type="text" />
-        <button className="search-button">
-          <span className="material-icons">search</span>
-        </button>
+        <Link to="/search">
+          <button className="search-input">
+            <h className="click-start">Click here to start</h>
+          </button>
+        </Link>
       </form>
     </div>
   );
