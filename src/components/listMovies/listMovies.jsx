@@ -38,7 +38,9 @@ export const ListMovies = (props) => {
       <div className="movies-list">
         {movies.length
           ? filmCover().map((movie) => (
-              <div className={"card" + (card ? "card-bigger" : "")}>
+              <div
+                key={movie.id}
+                className={"card" + (card ? "card-bigger" : "")}>
                 <div className="poster-container">
                   <img
                     className="poster-path"

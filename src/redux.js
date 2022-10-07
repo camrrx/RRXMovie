@@ -14,7 +14,7 @@ const movieSelectedSlice = createSlice({
     }
 });
 
-const displayMovieRating = createSlice({
+const displayMovieRatingSlice = createSlice({
     name: "isDisplay",
     initialState: false,
     reducers: {
@@ -27,10 +27,22 @@ const displayMovieRating = createSlice({
     }
 });
 
+const getResearchSlice = createSlice({
+    name: "movieResearch",
+    initialState: "",
+    reducers: {
+        getMovie: (state, action) => {
+            console.log(action.payload);
+            return state = action.payload.research;
+        },
+    }
+});
+
 export const store = configureStore({
     reducer:
     {
         movieSelected: movieSelectedSlice.reducer,
-        isDisplay : displayMovieRating.reducer
+        isDisplay: displayMovieRatingSlice.reducer,
+        movieResearch: getResearchSlice.reducer
 
 }});

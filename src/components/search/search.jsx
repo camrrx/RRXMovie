@@ -1,20 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getMovies } from "../../API/tmdbApi";
 import ListMovies from "../listMovies/listMovies";
 import "./search.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const Search = () => {
   //useState is used to modify in direct a state
   //state for the researcher
+  const movieResearch = useSelector((state) => state.movieResearch);
   const [researchingMovie, setResearchingMovie] = useState("");
 
   //state for getting all the movies from the api
   const [allMovies, setAllMovies] = useState([]);
 
+  //if second parameter change, use effect will be reload
+  useEffect(() => {
+    //getting the list of movies from search component
+    setResearchingMovie(movieResearch);
+  }, []);
+
   //event to update researchMovie when the 'input' is modified (onChange)
   const handleNewResearch = (research) => {
     setResearchingMovie(research.target.value);
-    //console.log("Title handle new research", allMovies);
+    // console.log("test", researchingMovie.length);
+    // if (researchingMovie.length) {
+    //   search();
+    // }
   };
 
   const search = () => {
@@ -35,6 +46,7 @@ const Search = () => {
         <div className="research-zone">
           <input
             type="search"
+            defaultValue={movieResearch}
             className="researching"
             onChange={handleNewResearch}
             onKeyPress={(e) => searchFromKey(e)}

@@ -39,3 +39,12 @@
   justify-content: center;
   align-content: center;
 }
+
+.description-container {
+  color: aliceblue;
+}
+
+.title-container {
+  color: aliceblue;
+  font-family: "Secular One", sans-serif;
+}

@@ -14,6 +14,7 @@ class App extends Component {
         <Provider store={store}>
           <Router>
             <Routes>
+            <Route exact path="*" element={<Home />}></Route>
             <Route exact path="/home" element={<Home />}></Route>
             <Route exact path="/search" element={<Search />}></Route>
             </Routes>
