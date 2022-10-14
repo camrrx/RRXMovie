@@ -17,26 +17,30 @@ const Search = () => {
   useEffect(() => {
     //getting the list of movies from search component
     setResearchingMovie(movieResearch);
+    searchFromMenu(movieResearch);
   }, []);
 
   //event to update researchMovie when the 'input' is modified (onChange)
   const handleNewResearch = (research) => {
     setResearchingMovie(research.target.value);
-    // console.log("test", researchingMovie.length);
-    // if (researchingMovie.length) {
-    //   search();
-    // }
   };
 
-  const search = () => {
-    getMovies(researchingMovie).then((movies) => {
+  const search = (movie) => {
+    getMovies(movie).then((movies) => {
       setAllMovies(movies);
     });
   };
 
   const searchFromKey = (event) => {
     if (event.key === "Enter") {
-      search();
+      search(researchingMovie);
+    }
+  };
+
+  const searchFromMenu = (movieResearch) => {
+    console.log(movieResearch);
+    if (movieResearch.length) {
+      search(movieResearch);
     }
   };
 
@@ -49,9 +53,13 @@ const Search = () => {
             defaultValue={movieResearch}
             className="researching"
             onChange={handleNewResearch}
-            onKeyPress={(e) => searchFromKey(e)}
-          />
-          <button className="button-search" onClick={search}>
+            onKeyPress={(e) => searchFromKey(e)}></input>
+
+          <button
+            className="button-search"
+            onClick={() => {
+              search(researchingMovie);
+            }}>
             <span className="material-icons">search</span>
           </button>
         </div>

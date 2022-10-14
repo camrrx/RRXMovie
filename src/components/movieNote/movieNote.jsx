@@ -7,10 +7,10 @@ const MovieNote = (props) => {
   //const [movie, setMovie] = useState({});
   const movieSelected = useSelector((state) => state.movieSelected);
   const dispatch = useDispatch();
-
+  const [valueSlider, setValueSlider] = React.useState(5);
   useEffect(() => {
     //getting the list of movies from search component
-    console.log(props.movieParam);
+    dynamicSlider(valueSlider);
   }, [props.movieParam]);
 
   // const descriptionMovie = (description) => {
@@ -21,6 +21,17 @@ const MovieNote = (props) => {
   //     ? description
   //     : description.substring(0, 280) + "[...]";
   // };
+  const dynamicSlider = (valueSlider) => {
+    const active = "#008000";
+    const inactive = "#dbdbdb";
+
+    const newBackgroundStyle = `linear-gradient(90deg, ${active} 0% ${
+      valueSlider * 10
+    }%, ${inactive} ${valueSlider * 10}% 100%)`;
+
+    document.getElementById("dynamicRange").style.background =
+      newBackgroundStyle;
+  };
 
   return (
     <div className="modal-container">
@@ -34,23 +45,39 @@ const MovieNote = (props) => {
         />
       </div>
       <div className="info-container">
-        <button
-          className="button-close"
-          onClick={() => {
-            dispatch({
-              type: "isDisplay/dontDisplayModal",
-              payload: false,
-            });
-          }}>
-          <span className="material-icons">clear</span>
-        </button>
+        <div className="button-container">
+          <button
+            className="button-close"
+            onClick={() => {
+              dispatch({
+                type: "isDisplay/dontDisplayModal",
+                payload: false,
+              });
+            }}>
+            <span className="material-icons">clear</span>
+          </button>
+        </div>
+
         <div className="title-container">
           <h1>{movieSelected.title}</h1>
         </div>
         <div className="description-container">
           <p>{movieSelected.overview}</p>
         </div>
-        <div className="rating-container"></div>
+        <div className="slidecontainer">
+          <input
+            id="dynamicRange"
+            className="slider"
+            type="range"
+            min="0"
+            max="10"
+            value={valueSlider}
+            onChange={(e) => {
+              setValueSlider(e.target.value);
+              dynamicSlider(e.target.value);
+            }}
+          />
+        </div>
       </div>
     </div>
   );
