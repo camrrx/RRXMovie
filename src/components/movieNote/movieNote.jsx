@@ -21,8 +21,10 @@ const MovieNote = (props) => {
   //     ? description
   //     : description.substring(0, 280) + "[...]";
   // };
+
+  //function used to to the dynamic slider
   const dynamicSlider = (valueSlider) => {
-    const active = "#008000";
+    const active = "#011230";
     const inactive = "#dbdbdb";
 
     const newBackgroundStyle = `linear-gradient(90deg, ${active} 0% ${
@@ -77,6 +79,12 @@ const MovieNote = (props) => {
               dynamicSlider(e.target.value);
             }}
           />
+        </div>
+        <div className="container-rating-movie">
+          <h1 className="rating-movie">
+            {valueSlider}
+            <small> / 10</small>
+          </h1>
         </div>
       </div>
     </div>

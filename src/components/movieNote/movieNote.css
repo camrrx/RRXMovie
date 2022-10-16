@@ -20,6 +20,8 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
 
 .poster {
@@ -44,6 +46,11 @@
   color: aliceblue;
   overflow: hidden;
   text-overflow: ellipsis;
+  overflow-y: scroll;
+}
+/*Dont show the scroll bar*/
+::-webkit-scrollbar {
+  width: auto;
 }
 
 .title-container {
@@ -58,8 +65,12 @@
 }
 
 .slidecontainer {
-  width: 100%; /* Width of the outside container */
+  width: auto;
+  height: auto;
   margin: 2rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .slider {
@@ -84,13 +95,26 @@
   height: 25px;
   border-radius: 50%;
   cursor: pointer;
-  background: #04aa6d;
+  background: #87a3d5;
 }
 
 .slider::-moz-range-thumb {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #04aa6d;
+  background: #87a3d5;
   cursor: pointer;
+}
+
+.container-rating-movie {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.rating-movie {
+  margin: 0;
+  font-size: 2rem;
+  color: white;
+  font-family: "Secular One";
 }

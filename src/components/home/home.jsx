@@ -40,6 +40,7 @@ const Home = () => {
           <button
             className="search-button"
             onClick={() => {
+              //On click, the text written in the input will be store in the redux store to be used in search page
               dispatch({
                 type: "movieResearch/getMovie",
                 payload: { research },

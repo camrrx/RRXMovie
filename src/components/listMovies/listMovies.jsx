@@ -5,10 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const ListMovies = (props) => {
   const [movies, setMovies] = useState({});
-  const [card, setCard] = useState(false);
   const movieSelected = useSelector((state) => state.movieSelected);
   const isDisplay = useSelector((state) => state.isDisplay);
-  const body = document.body;
 
   const dispatch = useDispatch();
 
@@ -17,16 +15,16 @@ export const ListMovies = (props) => {
   useEffect(() => {
     //getting the list of movies from search component
     setMovies(props.moviesParam);
-    console.log(props.moviesParam);
 
+    //if the modal is displayed, scrolling on list movies is NOT possible
     if (isDisplay) {
-      body.style.overflowY = "hidden";
+      document.getElementById("listMovies").style.overflow = "no-scroll";
+    } else {
+      document.getElementById("listMovies").style.overflow = "scroll";
     }
   }, [props.moviesParam]);
 
-  //let moviesTitle = Search();
-  //console.log('List movies', movies);
-
+  //function to get the movies with a poster
   const filmCover = () => {
     return movies.filter((movie) => {
       return movie.poster_path;
@@ -35,12 +33,10 @@ export const ListMovies = (props) => {
 
   return (
     <div>
-      <div className="movies-list">
+      <div className="movies-list" id="listMovies">
         {movies.length
           ? filmCover().map((movie) => (
-              <div
-                key={movie.id}
-                className={"card" + (card ? "card-bigger" : "")}>
+              <div key={movie.id} className="card">
                 <div className="poster-container">
                   <img
                     className="poster-path"
@@ -53,6 +49,7 @@ export const ListMovies = (props) => {
                 <div className="card-body">
                   <button
                     onClick={() => {
+                      //On click, store the movie selected and display the modal to rate
                       dispatch({
                         type: "movieSelected/addMovie",
                         payload: movie,
@@ -70,13 +67,17 @@ export const ListMovies = (props) => {
             ))
           : ""}
       </div>
-      {isDisplay ? (
-        <div className="movie-note">
-          <MovieNote movieParam={movieSelected}></MovieNote>
-        </div>
-      ) : (
-        ""
-      )}
+
+      {
+        //if isDisplay is true, display the MovieNote component related to the movie selected
+        isDisplay ? (
+          <div className="movie-note">
+            <MovieNote movieParam={movieSelected}></MovieNote>
+          </div>
+        ) : (
+          ""
+        )
+      }
     </div>
   );
 };
