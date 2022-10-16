@@ -1,0 +1,133 @@
+.modal-container {
+  width: 70%;
+  height: 50%;
+  display: flex;
+  background: linear-gradient(
+    90deg,
+    rgba(18, 17, 38, 1) 0%,
+    rgba(80, 97, 128, 1) 39%,
+    rgba(18, 17, 38, 1) 100%
+  );
+  border-radius: 12px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  margin: 2rem;
+  position: fixed;
+
+  .poster-container{
+    height: 100%;
+    justify-content: left;
+    align-content: left;
+    .poster {
+      height: 100%;
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+    }
+  }
+  .info-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  
+    .button-container {
+      display: flex;
+      justify-content: right;
+      align-content: right;
+      .button-close {
+        width: 30px;
+        height: 30px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+      }
+    }
+
+    .title-movie-container {
+      height: auto;
+      width: auto;
+      color: aliceblue;
+      font-family: "Secular One";
+    }
+
+    .description-container {
+      color: aliceblue;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      overflow-y: scroll;
+      font-family: "Secular One";
+    }
+
+    .slidecontainer {
+      width: auto;
+      height: auto;
+      margin: 2rem;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+        background: #d3d3d3;
+      }
+      .slider:hover {
+        opacity: 1;
+      }
+      
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        cursor: pointer;
+        background: #87a3d5;
+      }
+      
+      .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #87a3d5;
+        cursor: pointer;
+      }
+    }
+  
+    .container-rating-movie {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      
+      .button-to-rate{
+        border-radius:20px;
+        background-color: #87a3d5;
+        border:none;
+      }
+      .button-to-rate:hover{
+        transition: 0.5sec;
+        border-radius: 40px;
+        opacity: 0.9;
+      }
+      .rating-movie {
+        margin: 0;
+        font-size: 2rem;
+        color: white;
+        font-family: "Secular One";
+      }
+    }
+  }
+}
+
+/*Dont show the scroll bar*/
+::-webkit-scrollbar {
+  width: auto;
+}

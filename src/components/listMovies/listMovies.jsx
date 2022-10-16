@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./listMovies.css";
+import "./listMovies.scss";
 import MovieNote from "../movieNote/movieNote";
 import { useDispatch, useSelector } from "react-redux";
 

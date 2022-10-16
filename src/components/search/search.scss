@@ -15,6 +15,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(90deg, rgba(87,84,138,1) 0%, rgba(135,163,213,1) 35%, rgba(87,84,138,1) 100%);
+  border-radius: 30px;
 }
 
 .research-zone{
@@ -40,4 +42,25 @@
   background-color:darkslategrey;
   color:white;
   transform: rotate(90deg);
+}
+
+.title-container {
+  position: absolute;
+  top: 2rem;
+  left: 3rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  .title {
+    margin: 0;
+    font-size: 3rem;
+    color: white;
+    font-family: "Secular One", sans-serif;
+    cursor:pointer;
+  }
+  p {
+    color: white;
+
+  }
 }

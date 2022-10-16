@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./movieNote.css";
+import "./movieNote.scss";
 import { useDispatch, useSelector } from "react-redux";
 import ListMovies from "../listMovies/listMovies";
 
@@ -60,7 +60,7 @@ const MovieNote = (props) => {
           </button>
         </div>
 
-        <div className="title-container">
+        <div className="title-movie-container">
           <h1>{movieSelected.title}</h1>
         </div>
         <div className="description-container">
@@ -81,10 +81,12 @@ const MovieNote = (props) => {
           />
         </div>
         <div className="container-rating-movie">
-          <h1 className="rating-movie">
-            {valueSlider}
-            <small> / 10</small>
-          </h1>
+          <button className="button-to-rate">
+            <h1 className="rating-movie">
+              {valueSlider}
+              <small> / 10</small>
+            </h1>
+          </button>
         </div>
       </div>
     </div>

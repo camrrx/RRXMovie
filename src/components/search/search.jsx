@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getMovies } from "../../API/tmdbApi";
 import ListMovies from "../listMovies/listMovies";
-import "./search.css";
+import "./search.scss";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Search = () => {
   //useState is used to modify in direct a state
@@ -47,6 +48,15 @@ const Search = () => {
   return (
     <div>
       <div className="top-container">
+        <Link to="/home">
+          <div className="title-container">
+            <h1 className="title">RrX | </h1>
+            <p>
+              <small>The</small> Movie Ratings App
+            </p>
+          </div>
+        </Link>
+
         <div className="research-zone">
           <input
             type="search"
