@@ -14,21 +14,26 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <div className="header">
-        <div className="header-end">
-          <h2>à propos</h2>
-          <h2>Contact</h2>
-          <button>Hello</button>
-        </div>
+      <div className="header-container">
         <div className="title-container">
-          <h1 className="title">RrX | </h1>
-          <p>
-            <small>The</small> Movie Ratings App
-          </p>
+          <div>
+            <h1 className="title">RrX | </h1>
+          </div>
+
+          <div id="text-movie">
+            <p>
+              <small>The</small> Movie Ratings App
+            </p>
+          </div>
+        </div>
+
+        <div className="header-end">
+          <button>Sign in</button>
         </div>
       </div>
+
       <img src={require("./interstellar.jpg")} alt="interstellar" />
-      <form className="search-container">
+      <form className="search-home-container">
         <input
           id="movieSearch"
           className="search-input"

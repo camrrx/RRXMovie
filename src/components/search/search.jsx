@@ -47,13 +47,17 @@ const Search = () => {
 
   return (
     <div>
-      <div className="top-container">
+      <div className="search-container">
         <Link to="/home">
           <div className="title-container">
-            <h1 className="title">RrX | </h1>
-            <p>
-              <small>The</small> Movie Ratings App
-            </p>
+            <h1 id="title-rrx" className="title">
+              RrX |{" "}
+            </h1>
+            <div id="text-movie">
+              <p>
+                <small>The</small> Movie Ratings App
+              </p>
+            </div>
           </div>
         </Link>
 

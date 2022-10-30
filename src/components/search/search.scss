@@ -1,66 +1,77 @@
-
-.researching{
-    display: flex;
-    background-color: rgb(230, 230, 230);
-    border-radius: 40px;
-    border:none;
-    padding-inline-start:1.5rem;
-    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;  
-    outline:none;
-  }
-
-.top-container{
+.search-container{
   height: 100px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(90deg, rgba(87,84,138,1) 0%, rgba(135,163,213,1) 35%, rgba(87,84,138,1) 100%);
-  border-radius: 30px;
-}
+  border-radius:  0px  0px 30px 30px;
 
-.research-zone{
-  display: flex;
-  gap:1rem;
+  .researching{
+      display: flex;
+      background-color: rgb(230, 230, 230);
+      border-radius: 40px;
+      border:none;
+      padding-inline-start:1.5rem;
+      box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;  
+      outline:none;
+    }
 
-}
+  .research-zone{
+    display: flex;
+    gap:1rem;
 
-.button-search{
-  height:40px;
-  width: 40px;
-  border-radius: 50%;
-  border:none;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  transition:0.4s;
-
-}
-
-.button-search:hover{
-  transition:0.4s;
-  background-color:darkslategrey;
-  color:white;
-  transform: rotate(90deg);
-}
-
-.title-container {
-  position: absolute;
-  top: 2rem;
-  left: 3rem;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-  .title {
-    margin: 0;
-    font-size: 3rem;
-    color: white;
-    font-family: "Secular One", sans-serif;
-    cursor:pointer;
   }
-  p {
-    color: white;
 
+  .button-search{
+    height:40px;
+    width: 40px;
+    border-radius: 50%;
+    border:none;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transition:0.4s;
+
+  }
+
+  .button-search:hover{
+    transition:0.4s;
+    background-color:darkslategrey;
+    color:white;
+    transform: rotate(90deg);
+  }
+
+  .title-container {
+    position: absolute;
+    top: 2rem;
+    left: 1rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0rem;
+    opacity: 0.6;
+    .title {
+      margin: 0;
+      font-size: 3rem;
+      color: white;
+      font-family: "Secular One", sans-serif;
+      cursor:pointer;
+    }
+
+    p {
+      color: white;
+    }
+  }
+
+  @media (max-width: 830px) {
+    #text-movie { display: none; }
+
+  }
+  @media (max-width: 500px) {
+    #title-rrx {  
+      font-size: 2rem;
+      transform: rotate(-90deg);
+    }
   }
 }
