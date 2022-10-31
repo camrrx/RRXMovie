@@ -36,41 +36,35 @@ const MovieNote = (props) => {
   };
 
   return (
-    <div id="modal-container-id" className="modal-container">
-      <div id="poster-container-id" className="poster-container">
-        <img
-          id="img-poster-id"
-          className="poster"
-          src={
-            "https://image.tmdb.org/t/p/original/" + movieSelected.poster_path
-          }
-          alt=""
-        />
-      </div>
+    <div
+      id="modal-container-id"
+      className="modal-container"
+      style={{
+        backgroundImage: `url(${
+          "https://image.tmdb.org/t/p/original/" + movieSelected.backdrop_path
+        })`,
+      }}>
+      <div id="poster-container-id" className="poster-container"></div>
       <div className="info-container">
-        <div
-          id="title-and-button-container-id"
-          className="title-and-button-container">
-          <div id="button-container-id" className="button-container">
-            <button
-              className="button-close"
-              onClick={() => {
-                dispatch({
-                  type: "isDisplay/dontDisplayModal",
-                  payload: false,
-                });
-              }}>
-              <span className="material-icons">clear</span>
-            </button>
-          </div>
+        <div id="button-container-id" className="button-container">
+          <button
+            className="button-close"
+            onClick={() => {
+              dispatch({
+                type: "isDisplay/dontDisplayModal",
+                payload: false,
+              });
+            }}>
+            <span className="material-icons">clear</span>
+          </button>
+        </div>
 
-          <div id="title-movie-id" className="title-movie-container">
-            <h1>{movieSelected.title}</h1>
-          </div>
+        <div id="title-movie-id" className="title-movie-container">
+          <h1>{movieSelected.title}</h1>
         </div>
-        <div id="description-movie-id" className="description-container">
+        {/* <div id="description-movie-id" className="description-container">
           <p>{movieSelected.overview}</p>
-        </div>
+        </div> */}
         <div className="slidecontainer">
           <input
             id="dynamicRange"
