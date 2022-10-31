@@ -17,3 +17,8 @@ a {
   text-decoration: none;
   color: black;
 }
+
+h1 {
+  text-transform: none;
+  text-decoration: none;
+}

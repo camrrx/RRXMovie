@@ -36,9 +36,10 @@ const MovieNote = (props) => {
   };
 
   return (
-    <div className="modal-container">
-      <div className="poster-container">
+    <div id="modal-container-id" className="modal-container">
+      <div id="poster-container-id" className="poster-container">
         <img
+          id="img-poster-id"
           className="poster"
           src={
             "https://image.tmdb.org/t/p/original/" + movieSelected.poster_path
@@ -47,23 +48,27 @@ const MovieNote = (props) => {
         />
       </div>
       <div className="info-container">
-        <div className="button-container">
-          <button
-            className="button-close"
-            onClick={() => {
-              dispatch({
-                type: "isDisplay/dontDisplayModal",
-                payload: false,
-              });
-            }}>
-            <span className="material-icons">clear</span>
-          </button>
-        </div>
+        <div
+          id="title-and-button-container-id"
+          className="title-and-button-container">
+          <div id="button-container-id" className="button-container">
+            <button
+              className="button-close"
+              onClick={() => {
+                dispatch({
+                  type: "isDisplay/dontDisplayModal",
+                  payload: false,
+                });
+              }}>
+              <span className="material-icons">clear</span>
+            </button>
+          </div>
 
-        <div className="title-movie-container">
-          <h1>{movieSelected.title}</h1>
+          <div id="title-movie-id" className="title-movie-container">
+            <h1>{movieSelected.title}</h1>
+          </div>
         </div>
-        <div className="description-container">
+        <div id="description-movie-id" className="description-container">
           <p>{movieSelected.overview}</p>
         </div>
         <div className="slidecontainer">
@@ -82,10 +87,7 @@ const MovieNote = (props) => {
         </div>
         <div className="container-rating-movie">
           <button className="button-to-rate">
-            <h1 className="rating-movie">
-              {valueSlider}
-              <small> / 10</small>
-            </h1>
+            <h1 className="rating-movie">{valueSlider}</h1>
           </button>
         </div>
       </div>
