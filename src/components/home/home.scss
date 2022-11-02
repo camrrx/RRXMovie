@@ -2,108 +2,118 @@
   position: fixed;
   width: 100%;
   height: 100%;
-
-  .header-container {
-    position:fixed;
-    height: 80px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-
-    .title-container {
-      align-items: center;
-      display: flex;
-      
-      .title {
-        margin-left:12px;
-        font-size: 3rem;
-        color: white;
-        font-family: "Secular One", sans-serif;
-        opacity: 0.6;
-
-      }
-      @media (max-width: 400px) {
-        #text-movie { display: none; }
-      }
-      p {
-        margin-left: 12px;
-        color: white;
-      }
-    }
+  background-size: cover;
+  background-position: center center;
   
-    .header-end {
-      margin-right:12px;
-      display: flex;
-      align-items: center;
-
-      button {
-        border: 1px solid white;
-        background: none;
-        width: 100px;
-        height: 40px;
-        border-radius: 40px;
-        color: white;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background-color: white;
-        color: black;
-      }
-    }
-  }
-
-  img {
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    object-fit: cover;
-  }
-
-  .search-home-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -200px;
-    width: 400px;
-    height: 200px;
+  .background-home-container{
+    background: linear-gradient(90deg, rgba(121,8,59,0.5) 0%, rgba(7,15,74,0.5) 100%);
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
+    align-content: center;
+    justify-content:center;
+    background-size: cover;
+  
+    .header-container {
+      height: 80px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .title-container {
+        align-items: center;
+        display: flex;
+        
+        .title {
+          margin-left:12px;
+          font-size: 3rem;
+          color: white;
+          font-family: "Secular One", sans-serif;
+          opacity: 0.8;
 
-    .search-input {
-      height: 50px;
-      width: 250px;
-      border: 2px solid white;
-      background: rgba(0, 0, 0, 0.231);
-      color: white;
-      border-radius: 40px;
-      outline: none;
-      padding-inline-start: 3rem;
-      font-size: 1.4rem;
+        }
+        @media (max-width: 400px) {
+          #text-movie { display: none; }
+        }
+        p {
+          margin-left: 12px;
+          color: white;
+        }
+      }
+    
+      .header-end {
+        margin-right:12px;
+        display: flex;
+        align-items: center;
+
+        button {
+          border: 1px solid white;
+          background: none;
+          width: 100px;
+          height: 40px;
+          border-radius: 40px;
+          color: white;
+          cursor: pointer;
+        }
+
+        button:hover {
+          background: linear-gradient(90deg, rgba(121,8,59,1) 0%, rgba(7,15,74,1) 100%);
+          color: white;
+        }
+      }
     }
 
-    .search-button {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
+    img {
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      object-fit: cover;
+    }
+
+    .search-home-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -100px;
+      margin-left: -200px;
+      width: 400px;
+      height: 200px;
       display: flex;
       justify-content: center;
       align-items: center;
-      cursor: pointer;
-      &:hover {
-        transition:0.4s;
-        background-color:rgba(0, 0, 0, 0.231);;
-        color:white;
-        transform: rotate(90deg);
-      }
-    }
+      gap: 1rem;
 
-    .click-start{
-      cursor:pointer;
+      .search-input {
+        height: 50px;
+        width: 250px;
+        border: 2px solid white;
+        background: rgba(0, 0, 0, 0.231);
+        color: white;
+        border-radius: 40px;
+        outline: none;
+        padding-inline-start: 3rem;
+        font-size: 1.4rem;
+      }
+
+      .search-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+          transition:0.4s;
+          background-color:rgba(0, 0, 0, 0.231);;
+          color:white;
+          transform: rotate(90deg);
+        }
+      }
+
+      .click-start{
+        cursor:pointer;
+      }
     }
   }
 }

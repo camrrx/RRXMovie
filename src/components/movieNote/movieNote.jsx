@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import "./movieNote.scss";
 import { useDispatch, useSelector } from "react-redux";
 import ListMovies from "../listMovies/listMovies";
+import "../search/search.scss";
 
 const MovieNote = (props) => {
   //const [movie, setMovie] = useState({});
   const movieSelected = useSelector((state) => state.movieSelected);
   const dispatch = useDispatch();
   const [valueSlider, setValueSlider] = React.useState(5);
+
   useEffect(() => {
     //getting the list of movies from search component
     dynamicSlider(valueSlider);

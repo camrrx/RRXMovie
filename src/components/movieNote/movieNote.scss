@@ -7,7 +7,6 @@
   margin: 2rem;
   align-content: center;
   justify-content:center;
-  background-color:black ;
   background-size: cover;
 
   .info-container {
@@ -34,6 +33,7 @@
         display: flex;
         justify-content: center;
         align-content: center;
+        cursor:pointer;
       }
     }
 
@@ -133,6 +133,8 @@
         box-shadow: 0 0 3px gray;
         font-size:20px;
         font-weight:bold;
+        cursor:pointer;
+
       }
       .button-to-rate:hover{
         transition: 0.5sec;

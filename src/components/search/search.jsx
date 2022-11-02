@@ -5,11 +5,14 @@ import "./search.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Search = () => {
+const Search = (props) => {
   //useState is used to modify in direct a state
   //state for the researcher
   const movieResearch = useSelector((state) => state.movieResearch);
   const [researchingMovie, setResearchingMovie] = useState("");
+  const isDisplay = useSelector((state) => state.isDisplay);
+
+  const [modalDisplayed, setModalDisplayed] = useState(false);
 
   //state for getting all the movies from the api
   const [allMovies, setAllMovies] = useState([]);
@@ -19,7 +22,14 @@ const Search = () => {
     //getting the list of movies from search component
     setResearchingMovie(movieResearch);
     searchFromMenu(movieResearch);
-  }, []);
+    setModalDisplayed(isDisplay);
+
+    if (modalDisplayed) {
+      document.getElementById("searchContainer").style.filter = "blur(4px)";
+    } else {
+      document.getElementById("searchContainer").style.filter = "blur(0px)";
+    }
+  }, [props.isDisplay]);
 
   //event to update researchMovie when the 'input' is modified (onChange)
   const handleNewResearch = (research) => {
@@ -47,7 +57,7 @@ const Search = () => {
 
   return (
     <div>
-      <div className="search-container">
+      <div id="searchContainer" className="search-container">
         <Link to="/home">
           <div className="title-container">
             <h1 id="title-rrx" className="title">
@@ -55,7 +65,7 @@ const Search = () => {
             </h1>
             <div id="text-movie">
               <p>
-                <small>The</small> Movie Ratings App
+                <small>The</small> Movie Ratings
               </p>
             </div>
           </div>
@@ -76,6 +86,10 @@ const Search = () => {
             }}>
             <span className="material-icons">search</span>
           </button>
+        </div>
+
+        <div id = "search-header-sign-in-id" className="search-header-sign-in">
+          <button>Sign in</button>
         </div>
       </div>
       <div>

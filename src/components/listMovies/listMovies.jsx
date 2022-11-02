@@ -15,7 +15,6 @@ export const ListMovies = (props) => {
   useEffect(() => {
     //getting the list of movies from search component
     setMovies(props.moviesParam);
-
     //if the modal is displayed, scrolling on list movies is NOT possible
     if (isDisplay) {
       document.getElementById("listMovies").style.overflow = "no-scroll";
