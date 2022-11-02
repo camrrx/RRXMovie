@@ -12,8 +12,6 @@ const Search = (props) => {
   const [researchingMovie, setResearchingMovie] = useState("");
   const isDisplay = useSelector((state) => state.isDisplay);
 
-  const [modalDisplayed, setModalDisplayed] = useState(false);
-
   //state for getting all the movies from the api
   const [allMovies, setAllMovies] = useState([]);
 
@@ -22,14 +20,13 @@ const Search = (props) => {
     //getting the list of movies from search component
     setResearchingMovie(movieResearch);
     searchFromMenu(movieResearch);
-    setModalDisplayed(isDisplay);
 
-    if (modalDisplayed) {
-      document.getElementById("searchContainer").style.filter = "blur(4px)";
+    if (isDisplay) {
+      document.getElementById("searchContainerId").classList.add("flou");
     } else {
-      document.getElementById("searchContainer").style.filter = "blur(0px)";
+      document.getElementById("searchContainerId").classList.remove("flou");
     }
-  }, [props.isDisplay]);
+  }, [props.moviesParam, isDisplay]);
 
   //event to update researchMovie when the 'input' is modified (onChange)
   const handleNewResearch = (research) => {
@@ -57,7 +54,7 @@ const Search = (props) => {
 
   return (
     <div>
-      <div id="searchContainer" className="search-container">
+      <div className="search-container" id="searchContainerId">
         <Link to="/home">
           <div className="title-container">
             <h1 id="title-rrx" className="title">
@@ -88,7 +85,7 @@ const Search = (props) => {
           </button>
         </div>
 
-        <div id = "search-header-sign-in-id" className="search-header-sign-in">
+        <div id="search-header-sign-in-id" className="search-header-sign-in">
           <button>Sign in</button>
         </div>
       </div>

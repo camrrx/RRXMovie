@@ -1,3 +1,5 @@
+
+
 .search-container{
   height: 100px;
   width: 100%;
@@ -5,8 +7,9 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  border: none;
   //background: linear-gradient(90deg, rgba(87,84,138,1) 0%, rgba(135,163,213,1) 35%, rgba(87,84,138,1) 100%);
-  border-radius:  0px  0px 30px 30px;
+ // border-radius:  0px  0px 30px 30px;
 
   .researching{
       display: flex;
@@ -96,3 +99,10 @@
     }
   }
 }
+
+.flou{
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+ }

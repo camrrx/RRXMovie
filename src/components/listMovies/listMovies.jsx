@@ -18,10 +18,12 @@ export const ListMovies = (props) => {
     //if the modal is displayed, scrolling on list movies is NOT possible
     if (isDisplay) {
       document.getElementById("listMovies").style.overflow = "no-scroll";
+      document.getElementById("listMovies").style.filter = "blur(4px)";
     } else {
       document.getElementById("listMovies").style.overflow = "scroll";
+      document.getElementById("listMovies").style.filter = "blur(0px)";
     }
-  }, [props.moviesParam]);
+  }, [props.moviesParam, isDisplay]);
 
   //function to get the movies with a poster
   const filmCover = () => {

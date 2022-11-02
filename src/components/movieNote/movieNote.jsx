@@ -26,7 +26,7 @@ const MovieNote = (props) => {
 
   //function used to to the dynamic slider
   const dynamicSlider = (valueSlider) => {
-    const active = "#011230";
+    const active = "rgba(121,8,59,1)";
     const inactive = "#dbdbdb";
 
     const newBackgroundStyle = `linear-gradient(90deg, ${active} 0% ${
