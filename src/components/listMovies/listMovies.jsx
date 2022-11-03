@@ -17,11 +17,11 @@ export const ListMovies = (props) => {
     setMovies(props.moviesParam);
     //if the modal is displayed, scrolling on list movies is NOT possible
     if (isDisplay) {
+      document.getElementsByTagName("body")[0].style.overflow = "hidden";
       document.getElementById("listMovies").style.overflow = "no-scroll";
-      document.getElementById("listMovies").style.filter = "blur(4px)";
     } else {
+      document.getElementsByTagName("body")[0].style.overflow = "scroll";
       document.getElementById("listMovies").style.overflow = "scroll";
-      document.getElementById("listMovies").style.filter = "blur(0px)";
     }
   }, [props.moviesParam, isDisplay]);
 

@@ -2,15 +2,27 @@
 import "./home.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import background from "../../img/interstellar2.jpeg";
 
 const Home = () => {
   const dispatch = useDispatch();
   const [research, setResearch] = useState("");
+  const [openButton, setOpenButton] = useState(false);
+  useEffect(() => {
+    if (openButton) {
+      document.getElementById("buttonSignIN").style.display = "none";
+    } else {
+      document.getElementById("buttonSignIN").style.display = "initial";
+    }
+  }, [openButton]);
 
   const handleResearch = (event) => {
     setResearch(event.target.value);
+  };
+
+  const handleOpen = () => {
+    setOpenButton(!openButton);
   };
 
   return (
@@ -34,7 +46,23 @@ const Home = () => {
           </div>
 
           <div className="header-end">
-            <button>Sign in</button>
+            <button id="buttonSignIN" onClick={handleOpen}>
+              Sign In
+            </button>
+            {openButton ? (
+              <ul className="buttonMenu">
+                <li className="menu-item">
+                  <Link to="/login">
+                    <button>Log in</button>
+                  </Link>
+                </li>
+                <li className="menu-item">
+                  <Link to="/register">
+                    <button>Register</button>
+                  </Link>
+                </li>
+              </ul>
+            ) : null}
           </div>
         </div>
         {/* <img src={require("./interstellar.jpg")} alt="interstellar" /> */}

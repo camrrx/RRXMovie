@@ -20,13 +20,7 @@ const Search = (props) => {
     //getting the list of movies from search component
     setResearchingMovie(movieResearch);
     searchFromMenu(movieResearch);
-
-    if (isDisplay) {
-      document.getElementById("searchContainerId").classList.add("flou");
-    } else {
-      document.getElementById("searchContainerId").classList.remove("flou");
-    }
-  }, [props.moviesParam, isDisplay]);
+  }, [props.moviesParam]);
 
   //event to update researchMovie when the 'input' is modified (onChange)
   const handleNewResearch = (research) => {
@@ -86,7 +80,9 @@ const Search = (props) => {
         </div>
 
         <div id="search-header-sign-in-id" className="search-header-sign-in">
-          <button>Sign in</button>
+          <Link to="/login">
+            <button>Sign in</button>
+          </Link>{" "}
         </div>
       </div>
       <div>

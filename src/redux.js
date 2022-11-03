@@ -1,4 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { registerUser } from './userActions/userActions'
 
 const movieSelectedSlice = createSlice({
     name: "movieSelected",
@@ -32,9 +33,34 @@ const getResearchSlice = createSlice({
     initialState: "",
     reducers: {
         getMovie: (state, action) => {
-            console.log(action.payload);
             return state = action.payload.research;
         },
+    }
+});
+
+const userSlice = createSlice({
+    name: "user",
+    initialState: {
+        loading: false,
+        userInfo: null,
+        userToken: null,
+        error: null,
+        success: false
+    },
+    reducers: {},
+    extraReducers:{
+        [registerUser.pending]: (state) => {
+            state.loading = true
+            state.error = null
+          },
+          [registerUser.fulfilled]: (state, { payload }) => {
+            state.loading = false
+            state.success = true // registration successful
+          },
+          [registerUser.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.error = payload
+          },
     }
 });
 
@@ -43,6 +69,7 @@ export const store = configureStore({
     {
         movieSelected: movieSelectedSlice.reducer,
         isDisplay: displayMovieRatingSlice.reducer,
-        movieResearch: getResearchSlice.reducer
+        movieResearch: getResearchSlice.reducer,
+        user:userSlice.reducer
 
 }});

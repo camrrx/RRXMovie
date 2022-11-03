@@ -44,8 +44,10 @@
         margin-right:12px;
         display: flex;
         align-items: center;
+        margin-top:12px;
 
         button {
+          margin-right:12px;
           border: 1px solid white;
           background: none;
           width: 100px;
@@ -59,16 +61,20 @@
           background: linear-gradient(90deg, rgba(121,8,59,1) 0%, rgba(7,15,74,1) 100%);
           color: white;
         }
-      }
+        
+          .buttonMenu {
+            position: flex;
+            list-style-type: none;
+            margin: 5px;
+            padding: 5px;
+          }
+          
+          
+          
+        
+        }
+      
     }
-
-    img {
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      object-fit: cover;
-    }
-
     .search-home-container {
       position: absolute;
       top: 50%;
