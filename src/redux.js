@@ -1,5 +1,4 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import { registerUser } from './userActions/userActions'
 
 const movieSelectedSlice = createSlice({
     name: "movieSelected",
@@ -38,30 +37,45 @@ const getResearchSlice = createSlice({
     }
 });
 
-const userSlice = createSlice({
-    name: "user",
+const userRegisterSlice = createSlice({
+    name: "registerUser",
     initialState: {
-        loading: false,
-        userInfo: null,
-        userToken: null,
-        error: null,
+        username: "",
+        email: "",
+        password: "",
         success: false
     },
-    reducers: {},
-    extraReducers:{
-        [registerUser.pending]: (state) => {
-            state.loading = true
-            state.error = null
-          },
-          [registerUser.fulfilled]: (state, { payload }) => {
-            state.loading = false
-            state.success = true // registration successful
-          },
-          [registerUser.rejected]: (state, { payload }) => {
-            state.loading = false
-            state.error = payload
-          },
-    }
+    reducers: {
+        fillRegisterForm: (state, action) => {
+            state = {
+                email: action.payload.email,
+                username: action.payload.username,
+                password: action.payload.password
+            }
+            console.log("state",state)
+
+            return state;
+        }
+    },
+});
+
+const userLoginSlice = createSlice({
+    name: "loginUser",
+    initialState: {
+        usernameLogin: "",
+        emailLogin: "",
+        passwordLogin: "",
+        successLogin: false
+    },
+    reducers: {
+        fillLoginForm: (state, action) => {
+            state = {
+                usernameLogin: action.payload.username,
+                passwordLogin: action.payload.password
+            }
+            return state;
+        }, 
+    },
 });
 
 export const store = configureStore({
@@ -70,6 +84,7 @@ export const store = configureStore({
         movieSelected: movieSelectedSlice.reducer,
         isDisplay: displayMovieRatingSlice.reducer,
         movieResearch: getResearchSlice.reducer,
-        user:userSlice.reducer
+        registerUser:userRegisterSlice.reducer,
+        loginUser:userLoginSlice.reducer,
 
 }});

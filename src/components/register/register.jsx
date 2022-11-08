@@ -4,21 +4,33 @@ import "./register.scss";
 import { Link } from "react-router-dom";
 import background from "../../img/interstellar.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../userActions/userActions";
 import { useNavigate } from "react-router-dom";
 
+import axios from "axios";
+
 const Register = (props) => {
-  const { loading, userInfo, error, success } = useSelector(
-    (state) => state.user
+  const { username, email, password, success } = useSelector(
+    (state) => state.registerUser
   );
-  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
+  const [isRegistered, setIsRegistered] = React.useState(false);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const API_USER_URL = "http://localhost:9000/users/";
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
   useEffect(() => {
     // redirect user to login page if registration was successful
-    if (success) navigate("/home");
-  }, [navigate, success]);
+    if (isRegistered) {
+      navigate("/login");
+      setIsRegistered(false);
+    }
+  }, [navigate, isRegistered]);
 
   const submitForm = (data) => {
     //check if the password match
@@ -27,7 +39,26 @@ const Register = (props) => {
       return;
     }
     data.email = data.email.toLowerCase();
-    dispatch(registerUser(data));
+
+    dispatch({
+      type: "registerUser/fillRegisterForm",
+      payload: data,
+    });
+    //try to send the request to the BE to register the user
+    try {
+      axios.post(
+        API_USER_URL + "register",
+        {
+          email,
+          username,
+          password,
+        },
+        config
+      );
+      setIsRegistered(true);
+    } catch (err) {
+      console.log("error register", err);
+    }
   };
 
   return (
@@ -56,13 +87,13 @@ const Register = (props) => {
           className="form-register-container"
           onSubmit={handleSubmit(submitForm)}>
           <div className="form-group">
-            <label className="form-label" htmlFor="firstName">
-              First Name
+            <label className="form-label" htmlFor="username">
+              Username
             </label>
             <input
               type="text"
               className="form-input"
-              {...register("firstName")}
+              {...register("username")}
               required
             />
           </div>
@@ -89,7 +120,7 @@ const Register = (props) => {
             />
           </div>
           <div className="form-group">
-            <label className="form-label" htmlFor="email">
+            <label className="form-label" htmlFor="password">
               Confirm Password
             </label>
             <input
@@ -99,7 +130,7 @@ const Register = (props) => {
               required
             />
           </div>
-          <button type="submit" className="button-register" disabled={loading}>
+          <button type="submit" className="button-register">
             Register
           </button>
         </form>

@@ -1,14 +1,56 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./login.scss";
 import { Link } from "react-router-dom";
 import background from "../../img/interstellar.jpg";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
-  const { login, handleLogin } = useForm();
+  const { usernameLogin, emailLogin, passwordLogin, successLogin } =
+    useSelector((state) => state.registerUser);
+  const [isLoggedIn, setIsLoggedin] = React.useState(false);
 
-  const isLoginPossible = (data) => {
-    console.log();
+  const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const API_USER_URL = "http://localhost:9000/users/";
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  useEffect(() => {
+    // redirect user to login page if registration was successful
+
+    if (isLoggedIn) {
+      navigate("/home");
+      setIsLoggedin(false);
+    }
+  }, [navigate, isLoggedIn]);
+
+  const isLoginPossible = async (data) => {
+    dispatch({
+      type: "loginUser/fillLoginForm",
+      payload: data,
+    });
+    try {
+      const res = axios.post(
+        API_USER_URL + "login",
+        {
+          usernameLogin,
+          passwordLogin,
+        },
+        config
+      );
+      console.log(res.data);
+      setIsLoggedin(false);
+    } catch {
+      console.log("error loggin");
+    }
   };
 
   return (
@@ -35,15 +77,15 @@ const Login = (props) => {
         </Link>
         <form
           className="form-login-container"
-          onSubmit={handleLogin(isLoginPossible)}>
-          <div className="form-email">
-            <label className="form-label" htmlFor="email">
+          onSubmit={handleSubmit(isLoginPossible)}>
+          <div className="form-group">
+            <label className="form-label" htmlFor="username">
               Username
             </label>
             <input
-              type="email"
+              type="username"
               className="form-input"
-              {...login("email")}
+              {...register("username")}
               required
             />
           </div>
@@ -54,7 +96,7 @@ const Login = (props) => {
             <input
               type="password"
               className="form-input"
-              {...login("password")}
+              {...register("password")}
               required
             />
           </div>
