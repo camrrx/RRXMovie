@@ -8,8 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
-  const { usernameLogin, emailLogin, passwordLogin, successLogin } =
-    useSelector((state) => state.registerUser);
   const [isLoggedIn, setIsLoggedin] = React.useState(false);
 
   const { register, handleSubmit } = useForm();
@@ -34,11 +32,14 @@ const Login = (props) => {
 
   const isLoginPossible = async (data) => {
     dispatch({
-      type: "loginUser/fillLoginForm",
-      payload: data,
+      type: "loginUser/getLoginData",
+      payload: data.usernameLogin,
     });
+
     try {
-      const res = axios.post(
+      const usernameLogin = data.usernameLogin;
+      const passwordLogin = data.passwordLogin;
+      await axios.post(
         API_USER_URL + "login",
         {
           usernameLogin,
@@ -46,10 +47,9 @@ const Login = (props) => {
         },
         config
       );
-      console.log(res.data);
-      setIsLoggedin(false);
-    } catch {
-      console.log("error loggin");
+      setIsLoggedin(true);
+    } catch (e) {
+      console.log("error loggin", e);
     }
   };
 
@@ -85,7 +85,7 @@ const Login = (props) => {
             <input
               type="username"
               className="form-input"
-              {...register("username")}
+              {...register("usernameLogin")}
               required
             />
           </div>
@@ -96,7 +96,7 @@ const Login = (props) => {
             <input
               type="password"
               className="form-input"
-              {...register("password")}
+              {...register("passwordLogin")}
               required
             />
           </div>

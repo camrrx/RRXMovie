@@ -9,13 +9,16 @@ const Home = () => {
   const dispatch = useDispatch();
   const [research, setResearch] = useState("");
   const [openButton, setOpenButton] = useState(false);
+  const usernameLogin = useSelector((state) => state.loginUser.usernameLogin);
+  const successLogin = useSelector((state) => state.loginUser.successLogin);
+
   useEffect(() => {
     if (openButton) {
       document.getElementById("buttonSignIN").style.display = "none";
-    } else {
+    } else if (!successLogin) {
       document.getElementById("buttonSignIN").style.display = "initial";
     }
-  }, [openButton]);
+  }, [openButton, successLogin]);
 
   const handleResearch = (event) => {
     setResearch(event.target.value);
@@ -45,27 +48,28 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="header-end">
-            <button id="buttonSignIN" onClick={handleOpen}>
-              Sign In
-            </button>
-            {openButton ? (
-              <ul className="buttonMenu">
-                <li className="menu-item">
+          {!successLogin ? (
+            <div className="header-end">
+              <button id="buttonSignIN" onClick={handleOpen}>
+                Sign In
+              </button>
+              {openButton ? (
+                <div className="buttonMenu">
                   <Link to="/login">
                     <button>Log in</button>
                   </Link>
-                </li>
-                <li className="menu-item">
                   <Link to="/register">
                     <button>Register</button>
                   </Link>
-                </li>
-              </ul>
-            ) : null}
-          </div>
+                </div>
+              ) : null}
+            </div>
+          ) : (
+            <div className="header-end">
+              <button>Hello {usernameLogin}</button>
+            </div>
+          )}
         </div>
-        {/* <img src={require("./interstellar.jpg")} alt="interstellar" /> */}
         <form className="search-home-container">
           <input
             id="movieSearch"

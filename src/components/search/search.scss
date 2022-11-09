@@ -6,8 +6,6 @@
   justify-content: space-between;
   align-items: center;
   border: none;
-  //background: linear-gradient(90deg, rgba(87,84,138,1) 0%, rgba(135,163,213,1) 35%, rgba(87,84,138,1) 100%);
- // border-radius:  0px  0px 30px 30px;
 
   .researching{
       display: flex;
@@ -23,8 +21,6 @@
     display: flex;
     gap:1rem;
 
- 
-
   .button-search{
     height:40px;
     width: 40px;
@@ -34,7 +30,6 @@
     justify-content: center;
     align-items: center;
     transition:0.4s;
-
   }
 
   .button-search:hover{
@@ -68,26 +63,34 @@
     align-items: center;
 
     button {
-      border: 1px solid black;
-      background: none;
+      border:none;
+      background: linear-gradient(90deg, rgba(121,8,59,1) 30%, rgba(7,15,74,1) 100%);
       width: 100px;
       height: 40px;
       border-radius: 40px;
-      color: black;
+      color: white;
       cursor: pointer;
     }
 
     button:hover {
-      background: linear-gradient(90deg, rgba(121,8,59,1) 30%, rgba(7,15,74,1) 100%);
-      color: white;
+      background :none;
+      color: black;
+      border: 1px solid black;
     }
   }
 
 
   @media (max-width: 830px) {
     #text-movie { display: none; }
+    
     #search-header-sign-in-id {
       width: 15%;
+      margin-right:none;
+
+      #buttonSignIN{
+        height: 40px;
+        width: 40px;
+      }
     }
   }
   @media (max-width: 500px) {

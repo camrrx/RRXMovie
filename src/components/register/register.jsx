@@ -9,13 +9,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Register = (props) => {
-  const { username, email, password, success } = useSelector(
-    (state) => state.registerUser
-  );
   const { register, handleSubmit } = useForm();
   const [isRegistered, setIsRegistered] = React.useState(false);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const API_USER_URL = "http://localhost:9000/users/";
@@ -32,21 +28,22 @@ const Register = (props) => {
     }
   }, [navigate, isRegistered]);
 
-  const submitForm = (data) => {
+  const submitForm = async (data) => {
     //check if the password match
     if (data.password !== data.confirmPassword) {
       alert("Password mismatch");
       return;
     }
     data.email = data.email.toLowerCase();
+    console.log("data submitted", data);
 
-    dispatch({
-      type: "registerUser/fillRegisterForm",
-      payload: data,
-    });
     //try to send the request to the BE to register the user
     try {
-      axios.post(
+      const email = data.email;
+      const username = data.username;
+      const password = data.password;
+
+      await axios.post(
         API_USER_URL + "register",
         {
           email,
