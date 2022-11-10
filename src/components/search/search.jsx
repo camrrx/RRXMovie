@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getMovies } from "../../API/tmdbApi";
 import ListMovies from "../listMovies/listMovies";
+import LoginButton from "../loginButton/loginButton";
+
 import "./search.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -91,27 +93,7 @@ const Search = (props) => {
         </div>
 
         <div id="search-header-sign-in-id" className="search-header-sign-in">
-          {!successLogin ? (
-            <div>
-              <button id="buttonSignIN" onClick={handleOpen}>
-                <CgProfile style={{ height: 40, width: 40, }} />{" "}
-              </button>
-              {openButton ? (
-                <div className="buttonMenu">
-                  <Link to="/login">
-                    <button>Log in</button>
-                  </Link>
-                  <Link to="/register">
-                    <button>Register</button>
-                  </Link>
-                </div>
-              ) : null}
-            </div>
-          ) : (
-            <div>
-              <button>{usernameLogin}</button>
-            </div>
-          )}
+          <LoginButton />
         </div>
       </div>
       <div>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import background from "../../img/interstellar2.jpeg";
+import LoginButton from "../loginButton/loginButton";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -50,19 +51,7 @@ const Home = () => {
 
           {!successLogin ? (
             <div className="header-end">
-              <button id="buttonSignIN" onClick={handleOpen}>
-                Sign In
-              </button>
-              {openButton ? (
-                <div className="buttonMenu">
-                  <Link to="/login">
-                    <button>Log in</button>
-                  </Link>
-                  <Link to="/register">
-                    <button>Register</button>
-                  </Link>
-                </div>
-              ) : null}
+              <LoginButton />
             </div>
           ) : (
             <div className="header-end">
