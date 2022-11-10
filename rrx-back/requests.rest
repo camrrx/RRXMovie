@@ -1,0 +1,22 @@
+GET http://localhost:9000/users
+
+###
+
+POST http://localhost:9000/users/register
+Content-Type: application/json
+
+{
+    "email":"Camille",
+    "username":"camrrx",
+    "password":"14523"
+}
+
+###
+
+POST http://localhost:9000/users/login
+Content-Type: application/json
+
+{
+    "usernameLogin":"camrrx",
+    "passwordLogin":"123"
+}
