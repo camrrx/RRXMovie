@@ -4,7 +4,7 @@ import "./login.scss";
 import { Link } from "react-router-dom";
 import background from "../../img/interstellar.jpg";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
@@ -23,7 +23,6 @@ const Login = (props) => {
 
   useEffect(() => {
     // redirect user to login page if registration was successful
-
     if (isLoggedIn) {
       navigate("/home");
       setIsLoggedin(false);

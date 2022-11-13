@@ -2,31 +2,18 @@
 import "./home.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import background from "../../img/interstellar2.jpeg";
 import LoginButton from "../loginButton/loginButton";
 
 const Home = () => {
   const dispatch = useDispatch();
   const [research, setResearch] = useState("");
-  const [openButton, setOpenButton] = useState(false);
   const usernameLogin = useSelector((state) => state.loginUser.usernameLogin);
   const successLogin = useSelector((state) => state.loginUser.successLogin);
 
-  useEffect(() => {
-    if (openButton) {
-      document.getElementById("buttonSignIN").style.display = "none";
-    } else if (!successLogin) {
-      document.getElementById("buttonSignIN").style.display = "initial";
-    }
-  }, [openButton, successLogin]);
-
   const handleResearch = (event) => {
     setResearch(event.target.value);
-  };
-
-  const handleOpen = () => {
-    setOpenButton(!openButton);
   };
 
   return (

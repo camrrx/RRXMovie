@@ -4,19 +4,14 @@ import ListMovies from "../listMovies/listMovies";
 import LoginButton from "../loginButton/loginButton";
 
 import "./search.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { CgProfile } from "react-icons/cg";
 
 const Search = (props) => {
   //useState is used to modify in direct a state
   //state for the researcher
   const movieResearch = useSelector((state) => state.movieResearch);
   const [researchingMovie, setResearchingMovie] = useState("");
-  const isDisplay = useSelector((state) => state.isDisplay);
-  const usernameLogin = useSelector((state) => state.loginUser.usernameLogin);
-  const successLogin = useSelector((state) => state.loginUser.successLogin);
-  const [openButton, setOpenButton] = useState(false);
 
   //state for getting all the movies from the api
   const [allMovies, setAllMovies] = useState([]);
@@ -25,13 +20,10 @@ const Search = (props) => {
   useEffect(() => {
     //getting the list of movies from search component
     setResearchingMovie(movieResearch);
-    searchFromMenu(movieResearch);
-    if (openButton) {
-      document.getElementById("buttonSignIN").style.display = "none";
-    } else if (!successLogin) {
-      document.getElementById("buttonSignIN").style.display = "initial";
+    if (movieResearch.length) {
+      search(movieResearch);
     }
-  }, [props.moviesParam, openButton, successLogin]);
+  }, [props.moviesParam, movieResearch, setResearchingMovie]);
 
   //event to update researchMovie when the 'input' is modified (onChange)
   const handleNewResearch = (research) => {
@@ -50,15 +42,6 @@ const Search = (props) => {
     }
   };
 
-  const searchFromMenu = (movieResearch) => {
-    console.log(movieResearch);
-    if (movieResearch.length) {
-      search(movieResearch);
-    }
-  };
-  const handleOpen = () => {
-    setOpenButton(!openButton);
-  };
   return (
     <div>
       <div className="search-container" id="searchContainerId">
