@@ -12,6 +12,7 @@ const MovieNote = (props) => {
   useEffect(() => {
     //getting the list of movies from search component
     dynamicSlider(valueSlider);
+    console.log("movie selected", movieSelected);
   }, [props, valueSlider]);
 
   // const descriptionMovie = (description) => {
