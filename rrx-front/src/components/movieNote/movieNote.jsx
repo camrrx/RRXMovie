@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "./movieNote.scss";
 import { useDispatch, useSelector } from "react-redux";
-import ListMovies from "../listMovies/listMovies";
 import "../search/search.scss";
 
 const MovieNote = (props) => {

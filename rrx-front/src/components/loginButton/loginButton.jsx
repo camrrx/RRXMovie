@@ -35,12 +35,12 @@ const LoginButton = (props) => {
               </div>
             </div>
             {isComponentVisible ? (
-              <div className="button-login-register">
+              <div className="button-login-register" id="buttonLoginRegister">
                 <Link to="/login">
-                  <button>Log in</button>
+                  <button id="button">Log in</button>
                 </Link>
                 <Link to="/register">
-                  <button>Register</button>
+                  <button id="button">Register</button>
                 </Link>
               </div>
             ) : null}
