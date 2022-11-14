@@ -75,8 +75,9 @@ const MovieNote = (props) => {
 				</div>
 				<div className="data-movie">
 					<div className="casting-movie-container">
-						{castMovie.map((person) => {
-							// thx to CdC
+						{Object.keys(castMovie).map((key) => {
+							let person = castMovie[key];
+							console.log("person: ", person);
 							return <div>{person.name}</div>;
 						})}
 					</div>
