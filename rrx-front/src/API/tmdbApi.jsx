@@ -12,9 +12,21 @@ export const getMovies = async (titleMovie) => {
         "&page=1&" +
         API_KEY
     );
-    console.log(res.data.results);
+    //console.log(res.data.results);
 
     return res.data.results;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getMovieCredits = async (movie_id) => {
+  try {
+    let res = await axios.get(
+      API_URL + "/movie/" + movie_id + "/credits?" + API_KEY + "&language=fr-FR"
+    );
+    console.log("res casting", res.data.cast);
+    return res.data.cast;
   } catch (e) {
     console.log(e);
   }

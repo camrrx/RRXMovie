@@ -48,6 +48,7 @@ const Home = () => {
         </div>
         <form className="search-home-container">
           <input
+            placeholder="Interstellar, Avatar ..."
             id="movieSearch"
             className="search-input"
             type="text"

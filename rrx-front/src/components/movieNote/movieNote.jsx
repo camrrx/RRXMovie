@@ -1,19 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./movieNote.scss";
 import { useDispatch, useSelector } from "react-redux";
 import "../search/search.scss";
+import { getMovieCredits } from "../../API/tmdbApi";
 
 const MovieNote = (props) => {
   //const [movie, setMovie] = useState({});
   const movieSelected = useSelector((state) => state.movieSelected);
   const dispatch = useDispatch();
   const [valueSlider, setValueSlider] = React.useState(5);
+  const [castMovie, setCastMovie] = useState([]);
 
   useEffect(() => {
     //getting the list of movies from search component
     dynamicSlider(valueSlider);
-    console.log("movie selected", movieSelected);
-  }, [props, valueSlider]);
+    if (movieSelected) {
+      getCastMovie(movieSelected.id);
+    }
+  }, [props, valueSlider, movieSelected]);
 
   // const descriptionMovie = (description) => {
   //   if (!description) {
@@ -35,6 +39,22 @@ const MovieNote = (props) => {
 
     document.getElementById("dynamicRange").style.background =
       newBackgroundStyle;
+  };
+
+  const getCastMovie = (idMovie) => {
+    getMovieCredits(idMovie).then((casting) => {
+      let castArray = [];
+      let castActorArray = [];
+      for (let i = 0; i < 3; i++) {
+        // castArray.push({
+        //   actor: casting[i].name,
+        //   character: casting[i].character,
+        // });
+        castActorArray.push(casting[i].name);
+      }
+      console.log("cast array", castArray);
+      setCastMovie(castActorArray);
+    });
   };
 
   return (
@@ -63,6 +83,14 @@ const MovieNote = (props) => {
 
         <div id="title-movie-id" className="title-movie-container">
           <h1>{movieSelected.title}</h1>
+        </div>
+        <div className="data-movie">
+          <div className="casting-movie-container">
+            <div className="casting-actor-div">{castMovie[0]}</div>
+            {/* <div className="casting-character-div">{castMovie[0]}</div> */}
+            <div className="casting-actor-div">{castMovie[1]}</div>
+            <div className="casting-actor-div">{castMovie[2]}</div>
+          </div>
         </div>
         {/* <div id="description-movie-id" className="description-container">
           <p>{movieSelected.overview}</p>
