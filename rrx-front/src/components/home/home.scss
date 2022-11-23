@@ -104,7 +104,7 @@
       gap: 1rem;
 
       .search-input {
-        height: 50px;
+        height: 40px;
         width: 200px;
         border: 2px solid white;
         background: rgba(0, 0, 0, 0.231);
@@ -113,6 +113,11 @@
         outline: none;
         padding-inline-start: 3rem;
         font-size: 1rem;
+
+        &::-webkit-input-placeholder {
+          color: white; /*Change the placeholder color*/
+          opacity: 0.3; /*Change the opacity between 0 and 1*/
+        }
       }
 
       .search-button {

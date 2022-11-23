@@ -9,6 +9,7 @@
     justify-content: space-between;
     align-items: center;
     border: none;
+
     .logo-rrx {
       display: flex;
       height: 45px;
@@ -91,12 +92,10 @@
     }
   }
   @media (max-width: 500px) {
-    .title-rrx {
-      font-size: 2rem;
-      transform: rotate(-90deg);
-    }
-    .logo-rrx {
-      height: 30px;
+    .header-container {
+      .logo-rrx {
+        height: 25px;
+      }
     }
   }
 }

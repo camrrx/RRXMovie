@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./login.scss";
 import { Link } from "react-router-dom";
-import background from "../../img/interstellar.jpg";
+import background from "../../img/starwars.jpeg";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import logo from "../../img/rrxLogoWhite.png";
 
 const Login = (props) => {
   const [isLoggedIn, setIsLoggedin] = React.useState(false);
@@ -63,7 +64,7 @@ const Login = (props) => {
           <div className="header-container">
             <div className="title-container">
               <div>
-                <h1 className="title">RrX | </h1>
+                <img className="logo-rrx" src={logo} alt="" />{" "}
               </div>
 
               <div id="text-movie">
