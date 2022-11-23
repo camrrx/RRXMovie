@@ -3,32 +3,29 @@ import "./movieNote.scss";
 import { useDispatch, useSelector } from "react-redux";
 import "../search/search.scss";
 import { getMovieCredits } from "../../API/tmdbApi";
+// import { getMovieDetails } from "../../API/tmdbApi";
 
 const MovieNote = (props) => {
-  //const [movie, setMovie] = useState({});
   const movieSelected = useSelector((state) => state.movieSelected);
-  const dispatch = useDispatch();
   const [valueSlider, setValueSlider] = React.useState(5);
   const [castMovie, setCastMovie] = useState({});
+  const [characterActor, setCharacterActor] = useState("");
+  // const [detailsMovie, setDetailsMovie] = useState({});
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    //getting the list of movies from search component
     dynamicSlider(valueSlider);
+
     if (movieSelected) {
       getCastMovie(movieSelected.id);
+      //getDetailsMovie(movieSelected.id);
     }
+    handleCreditsScroll();
+    document.getElementById("creditsOverlayLeft").style.display = "none";
   }, [props, valueSlider, movieSelected]);
 
-  // const descriptionMovie = (description) => {
-  //   if (!description) {
-  //     return "This movie does not have description";
-  //   }
-  //   return description.length < 280
-  //     ? description
-  //     : description.substring(0, 280) + "[...]";
-  // };
-
-  //function used to to the dynamic slider
+  /*Creation of the dynamic slider*/
   const dynamicSlider = (valueSlider) => {
     const active = "rgba(121,8,59,1)";
     const inactive = "#dbdbdb";
@@ -41,9 +38,58 @@ const MovieNote = (props) => {
       newBackgroundStyle;
   };
 
+  /*Get the casting of the movie and set it into a state*/
   const getCastMovie = (idMovie) => {
     getMovieCredits(idMovie).then((casting) => {
       setCastMovie(casting.cast);
+    });
+  };
+
+  /*Choose if we'll display the actor or the character depending on a click action*/
+  const actorOrCharacter = (person) => {
+    console.log(person);
+    characterActor === person.actor
+      ? setCharacterActor(person.character)
+      : setCharacterActor(person.name);
+  };
+
+  const displayActorCard = () => {
+    return Object.keys(castMovie).map((key) => {
+      let person = castMovie[key];
+      return (
+        <div
+          className="casting-actor-div"
+          onClick={() => {
+            console.log(characterActor);
+            actorOrCharacter(person);
+          }}>
+          {person.name}
+        </div>
+      );
+    });
+  };
+  /*Get the details of the movie and set it into a state*/
+  // const getDetailsMovie = (idMovie) => {
+  //   getMovieDetails(idMovie).then((details) => {
+  //     setDetailsMovie(details);
+  //   });
+  // };
+
+  const handleCreditsScroll = () => {
+    document.getElementById("credits").addEventListener("scroll", () => {
+      let creditsContainer = document.getElementById("credits");
+      var maxScrollLeft =
+        creditsContainer.scrollWidth - creditsContainer.clientWidth;
+      if (creditsContainer.scrollLeft < 1) {
+        document.getElementById("creditsOverlayLeft").style.display = "none";
+      } else {
+        document.getElementById("creditsOverlayLeft").style.display = "flex";
+      }
+      if (creditsContainer.scrollLeft === maxScrollLeft) {
+        document.getElementById("creditsOverlayRight").style.display = "none";
+      } else {
+        document.getElementById("creditsOverlayRight").style.display = "flex";
+      }
     });
   };
 
@@ -51,12 +97,19 @@ const MovieNote = (props) => {
     <div
       id="modal-container-id"
       className="modal-container"
-      style={{
-        backgroundImage: `url(${
+      // style={{
+      //   backgroundImage: `url(${
+      //     "https://image.tmdb.org/t/p/original/" + movieSelected.backdrop_path
+      //   })`,
+      // }}
+    >
+      <img
+        className="background-modal"
+        src={
           "https://image.tmdb.org/t/p/original/" + movieSelected.backdrop_path
-        })`,
-      }}>
-      <div id="poster-container-id" className="poster-container"></div>
+        }
+        alt=""
+      />
       <div className="info-container">
         <div id="button-container-id" className="button-container">
           <button
@@ -71,36 +124,29 @@ const MovieNote = (props) => {
           </button>
         </div>
 
-        <div id="title-movie-id" className="title-movie-container">
-          <h1>{movieSelected.title}</h1>
-        </div>
-        <div className="data-movie">
-          <div className="casting-movie-container">
-            {Object.keys(castMovie)
-              .slice(0, 3)
-              .map((key) => {
-                let person = castMovie[key];
-                console.log("person: ", person);
-                let actorName = person.name;
-                return (
-                  <div
-                    className="casting-actor-div"
-                    onClick={() => {
-                      console.log(actorName);
-
-                      return actorName === person.name
-                        ? (actorName = person.character)
-                        : (actorName = person.name);
-                    }}>
-                    {actorName}
-                  </div>
-                );
-              })}
+        <div className="movie-and-genre-container">
+          <div id="title-movie-id" className="title-movie-container">
+            <h1>{movieSelected.title}</h1>
           </div>
         </div>
-        {/* <div id="description-movie-id" className="description-container">
-          <p>{movieSelected.overview}</p>
+        {/* <div className="details-movie-genre">{detailsMovie.genre}</div>
+        </div>
+        <div className="description-container">
+          {movieSelected.overview ? (
+            <p>{movieSelected.overview} </p>
+          ) : (
+            <p>This movie does not have any description</p>
+          )}
         </div> */}
+
+        <div className="actor-card-container">
+          <div id="creditsOverlayLeft" className="credits-overlay-left"></div>
+          <div id="creditsOverlayRight" className="credits-overlay-right"></div>
+          <div className="casting-movie-container" id="credits">
+            {displayActorCard()}
+          </div>
+        </div>
+
         <div className="slidecontainer">
           <input
             id="dynamicRange"
@@ -115,6 +161,7 @@ const MovieNote = (props) => {
             }}
           />
         </div>
+
         <div className="container-rating-movie">
           <button className="button-to-rate">
             <h1 className="rating-movie">{valueSlider}</h1>

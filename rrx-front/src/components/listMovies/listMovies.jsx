@@ -11,11 +11,10 @@ export const ListMovies = (props) => {
   const dispatch = useDispatch();
 
   //useEffect -> function which triggered before rendering
-  //if second parameter change, use effect will be reload
+  //if parameter into [] change, use effect will be reload
   useEffect(() => {
-    //getting the list of movies from search component
     setMovies(props.moviesParam);
-    //if the modal is displayed, scrolling on list movies is NOT possible
+    //If the modal is displayed, scrolling on list movies is NOT possible
     if (isDisplay) {
       document.getElementsByTagName("body")[0].style.overflow = "hidden";
       document.getElementById("listMovies").style.overflow = "no-scroll";
@@ -25,7 +24,7 @@ export const ListMovies = (props) => {
     }
   }, [props.moviesParam, isDisplay]);
 
-  //function to get the movies with a poster
+  /*Get the movies with a poster*/
   const filmCover = () => {
     return movies.filter((movie) => {
       return movie.poster_path;
@@ -70,7 +69,7 @@ export const ListMovies = (props) => {
       </div>
 
       {
-        //if isDisplay is true, display the MovieNote component related to the movie selected
+        //If isDisplay is true, display the MovieNote component related to the movie selected
         isDisplay ? (
           <div className="movie-note">
             <MovieNote movieParam={movieSelected}></MovieNote>

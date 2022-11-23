@@ -11,9 +11,7 @@ const LoginButton = (props) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
 
-  //if second parameter change, use effect will be reload
   useEffect(() => {
-    //getting the list of movies from search component
     if (isComponentVisible) {
       document.getElementById("buttonSignIN").style.display = "none";
     } else if (!successLogin) {
@@ -24,6 +22,7 @@ const LoginButton = (props) => {
   const handleOpen = () => {
     setIsComponentVisible(!isComponentVisible);
   };
+
   return (
     <div>
       <div id="search-header-sign-in-id" className="search-header-sign-in">

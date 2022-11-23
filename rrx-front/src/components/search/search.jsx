@@ -43,42 +43,40 @@ const Search = (props) => {
   };
 
   return (
-    <div>
-      <div className="search-container" id="searchContainerId">
+    <div className="search-container">
+      <div className="header-container" id="searchContainerId">
         <Link to="/home">
           <div className="title-container">
-            <h1 id="title-rrx" className="title">
-              RrX |{" "}
-            </h1>
-            <div id="text-movie">
+            <h1 className="title-rrx">RrX | </h1>
+            <div className="text-movie">
               <p>
                 <small>The</small> Movie Ratings
               </p>
             </div>
           </div>
         </Link>
-
-        <div className="research-zone">
-          <input
-            type="search"
-            defaultValue={movieResearch}
-            className="researching"
-            onChange={handleNewResearch}
-            onKeyPress={(e) => searchFromKey(e)}></input>
-
-          <button
-            className="button-search"
-            onClick={() => {
-              search(researchingMovie);
-            }}>
-            <span className="material-icons">search</span>
-          </button>
-        </div>
-
-        <div id="search-header-sign-in-id" className="search-header-sign-in">
+        <div className="sign-in">
           <LoginButton />
         </div>
       </div>
+
+      <div className="research-zone">
+        <input
+          type="search"
+          defaultValue={movieResearch}
+          className="researching"
+          onChange={handleNewResearch}
+          onKeyPress={(e) => searchFromKey(e)}></input>
+
+        <button
+          className="button-search"
+          onClick={() => {
+            search(researchingMovie);
+          }}>
+          <span className="material-icons">search</span>
+        </button>
+      </div>
+
       <div>
         <ListMovies moviesParam={allMovies ? allMovies : []} />
       </div>
