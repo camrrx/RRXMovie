@@ -13,7 +13,7 @@ export const getMovies = async (titleMovie) => {
         "&page=1&" +
         API_KEY
     );
-    //console.log(res.data.results);
+    // console.log(res.data.results);
 
     return res.data.results;
   } catch (e) {
@@ -37,13 +37,15 @@ export const getMovieCredits = async (movie_id) => {
 };
 
 /*Get all the details of the movie according to the id of movie*/
-// export const getMovieDetails = async (movie_id) => {
-//   try {
-//     let res = await axios.get(
-//       API_URL + "/movie/" + movie_id + "/details?" + API_KEY + "&language=fr-FR"
-//     );
-//     return res.data;
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
+export const getMovieDetails = async (movie_id) => {
+  try {
+    let res = await axios.get(
+      API_URL + "/movie/" + movie_id + "?" + API_KEY + "&language=fr-FR"
+    );
+
+    console.log(res.data);
+    return res.data;
+  } catch (e) {
+    console.log(e);
+  }
+};

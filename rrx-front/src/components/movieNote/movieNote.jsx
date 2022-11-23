@@ -3,14 +3,14 @@ import "./movieNote.scss";
 import { useDispatch, useSelector } from "react-redux";
 import "../search/search.scss";
 import { getMovieCredits } from "../../API/tmdbApi";
-// import { getMovieDetails } from "../../API/tmdbApi";
+import { getMovieDetails } from "../../API/tmdbApi";
 
 const MovieNote = (props) => {
   const movieSelected = useSelector((state) => state.movieSelected);
   const [valueSlider, setValueSlider] = React.useState(5);
   const [castMovie, setCastMovie] = useState({});
   const [characterActor, setCharacterActor] = useState("");
-  // const [detailsMovie, setDetailsMovie] = useState({});
+  const [detailsMovie, setDetailsMovie] = useState({});
 
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const MovieNote = (props) => {
 
     if (movieSelected) {
       getCastMovie(movieSelected.id);
-      //getDetailsMovie(movieSelected.id);
+      getDetailsMovie(movieSelected.id);
     }
   }, [props, valueSlider, movieSelected]);
 
@@ -46,43 +46,61 @@ const MovieNote = (props) => {
   /*Choose if we'll display the actor or the character depending on a click action*/
   const actorOrCharacter = (person) => {
     console.log(person);
-    characterActor === person.actor
-      ? setCharacterActor(person.character)
-      : setCharacterActor(person.name);
+    let element = document.getElementById("actor-card-" + person.id);
+    let res;
+    element.innerHTML === person.name
+      ? (res = person.character)
+      : (res = person.name);
+
+    element.innerHTML = res;
+    console.log(element);
+    // characterActor === person.actor
+    //   ? setCharacterActor(person.character)
+    //   : setCharacterActor(person.name);
   };
 
   const displayActorCard = () => {
     return Object.keys(castMovie).map((key) => {
       let person = castMovie[key];
       return (
-        <div
-          className="casting-actor-div"
-          onClick={() => {
-            console.log(characterActor);
-            actorOrCharacter(person);
-          }}>
-          {person.name}
+        <div key={person.id}>
+          <div className="casting-container">
+            {person.profile_path ? (
+              <img
+                className="casting-img"
+                src={"https://image.tmdb.org/t/p/w780" + person.profile_path}
+                alt=""
+              />
+            ) : (
+              <div className="casting-img-no-picture"></div>
+            )}
+            <div className="casting-actor-container">
+              <div
+                id={"actor-card-" + person.id}
+                className="casting-actor-div"
+                onClick={() => {
+                  console.log(characterActor);
+                  actorOrCharacter(person);
+                }}>
+                {person.name}
+              </div>
+            </div>
+          </div>
         </div>
       );
     });
   };
   /*Get the details of the movie and set it into a state*/
-  // const getDetailsMovie = (idMovie) => {
-  //   getMovieDetails(idMovie).then((details) => {
-  //     setDetailsMovie(details);
-  //   });
-  // };
+  const getDetailsMovie = (idMovie) => {
+    getMovieDetails(idMovie).then((details) => {
+      console.log(details);
+
+      setDetailsMovie(details);
+    });
+  };
 
   return (
-    <div
-      id="modal-container-id"
-      className="modal-container"
-      // style={{
-      //   backgroundImage: `url(${
-      //     "https://image.tmdb.org/t/p/original/" + movieSelected.backdrop_path
-      //   })`,
-      // }}
-    >
+    <div id="modal-container-id" className="modal-container">
       <div className="background-modal-overlay"></div>
 
       <img
@@ -108,18 +126,25 @@ const MovieNote = (props) => {
 
         <div className="movie-and-genre-container">
           <div id="title-movie-id" className="title-movie-container">
-            <h1>{movieSelected.title}</h1>
+            {movieSelected.title}
+          </div>
+          <div className="genre-container">
+            {detailsMovie.genres
+              ? detailsMovie.genres.map((genre, index) => {
+                  return (
+                    <div className="details-movie-genre">{genre.name}</div>
+                  );
+                })
+              : ""}
+          </div>
+          <div className="description-container">
+            {movieSelected.overview ? (
+              <p>{movieSelected.overview} </p>
+            ) : (
+              <p>This movie does not have any description</p>
+            )}
           </div>
         </div>
-        {/* <div className="details-movie-genre">{detailsMovie.genre}</div>
-        </div>
-        <div className="description-container">
-          {movieSelected.overview ? (
-            <p>{movieSelected.overview} </p>
-          ) : (
-            <p>This movie does not have any description</p>
-          )}
-        </div> */}
 
         <div className="actor-card-container">
           <div className="casting-movie-container">{displayActorCard()}</div>
