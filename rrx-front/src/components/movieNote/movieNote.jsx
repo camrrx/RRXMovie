@@ -21,8 +21,6 @@ const MovieNote = (props) => {
       getCastMovie(movieSelected.id);
       //getDetailsMovie(movieSelected.id);
     }
-    handleCreditsScroll();
-    document.getElementById("creditsOverlayLeft").style.display = "none";
   }, [props, valueSlider, movieSelected]);
 
   /*Creation of the dynamic slider*/
@@ -75,24 +73,6 @@ const MovieNote = (props) => {
   //   });
   // };
 
-  const handleCreditsScroll = () => {
-    document.getElementById("credits").addEventListener("scroll", () => {
-      let creditsContainer = document.getElementById("credits");
-      var maxScrollLeft =
-        creditsContainer.scrollWidth - creditsContainer.clientWidth;
-      if (creditsContainer.scrollLeft < 1) {
-        document.getElementById("creditsOverlayLeft").style.display = "none";
-      } else {
-        document.getElementById("creditsOverlayLeft").style.display = "flex";
-      }
-      if (creditsContainer.scrollLeft === maxScrollLeft) {
-        document.getElementById("creditsOverlayRight").style.display = "none";
-      } else {
-        document.getElementById("creditsOverlayRight").style.display = "flex";
-      }
-    });
-  };
-
   return (
     <div
       id="modal-container-id"
@@ -103,6 +83,8 @@ const MovieNote = (props) => {
       //   })`,
       // }}
     >
+      <div className="background-modal-overlay"></div>
+
       <img
         className="background-modal"
         src={
@@ -140,11 +122,7 @@ const MovieNote = (props) => {
         </div> */}
 
         <div className="actor-card-container">
-          <div id="creditsOverlayLeft" className="credits-overlay-left"></div>
-          <div id="creditsOverlayRight" className="credits-overlay-right"></div>
-          <div className="casting-movie-container" id="credits">
-            {displayActorCard()}
-          </div>
+          <div className="casting-movie-container">{displayActorCard()}</div>
         </div>
 
         <div className="slidecontainer">
