@@ -71,7 +71,7 @@ $modalHeight: 75%;
       flex-direction: column;
       justify-content: center;
       align-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 6px;
 
       .title-movie-container {
         //background-color: purple;
@@ -207,7 +207,7 @@ $modalHeight: 75%;
     }
 
     .description-container {
-      //background-color: blue;
+      //      background-color: blue;
       color: white;
       margin-right: 15px;
       margin-left: 15px;
@@ -216,10 +216,11 @@ $modalHeight: 75%;
       align-content: center;
       font-size: 1rem;
       height: auto;
-      max-height: 50px;
-      // overflow: hidden;
-      // text-overflow: ellipsis;
-      // overflow-y: scroll;
+      //max-height: 50px;
+      height: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      overflow-y: scroll;
       font-family: "Arial";
       text-align: center;
       margin: 30px 12px 30px 12px;
@@ -328,24 +329,23 @@ $modalHeight: 75%;
 @media (max-width: 700px) {
   #modal-container-id {
     width: 90%;
-    height: 70%;
+    height: 75%;
     flex-direction: column;
 
     .background-modal-overlay {
       width: 90%;
-      height: 70%;
+      height: 75%;
     }
 
     .details-movie-genre {
       font-size: 0.5rem;
     }
     .casting-container {
-      padding-top: 7px;
-      height: 100px;
-      width: 50px;
+      height: 200px;
+      width: 100px;
     }
     .casting-actor-div {
-      font-size: 0.5rem;
+      font-size: 0.7rem;
     }
 
     .slidecontainer {
@@ -366,7 +366,7 @@ $modalHeight: 75%;
 
     .description-container {
       font-size: 0.8rem;
-      max-height: 25px;
+      //max-height: 25px;
     }
     .details-movie-genre {
       font-size: 0.8rem;

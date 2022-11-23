@@ -3,8 +3,9 @@ import "./home.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
-import background from "../../img/interstellar2.jpeg";
+import background from "../../img/jungleBook.jpeg";
 import LoginButton from "../loginButton/loginButton";
+import logo from "../../img/rrxLogoWhite.png";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -26,10 +27,10 @@ const Home = () => {
         <div className="header-container">
           <div className="title-container">
             <div>
-              <h1 className="title">RrX | </h1>
+              <img className="logo-rrx" src={logo} alt="" />{" "}
             </div>
 
-            <div id="text-movie">
+            <div className="text-movie">
               <p>
                 <small>The</small> Movie Ratings App
               </p>

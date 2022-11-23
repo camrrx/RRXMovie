@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getMovies } from "../../API/tmdbApi";
 import ListMovies from "../listMovies/listMovies";
 import LoginButton from "../loginButton/loginButton";
+import logo from "../../img/rrxLogo.png";
 
 import "./search.scss";
 import { useSelector } from "react-redux";
@@ -47,7 +48,7 @@ const Search = (props) => {
       <div className="header-container" id="searchContainerId">
         <Link to="/home">
           <div className="title-container">
-            <h1 className="title-rrx">RrX | </h1>
+            <img className="logo-rrx" src={logo} alt="" />{" "}
             <div className="text-movie">
               <p>
                 <small>The</small> Movie Ratings
