@@ -8,8 +8,8 @@
     justify-content: center;
     background: linear-gradient(
       90deg,
-      rgba(121, 8, 59, 1) 30%,
-      rgba(7, 15, 74, 1) 100%
+      rgba(121, 8, 59, 0.4) 30%,
+      rgba(7, 15, 74, 0.4) 100%
     );
     width: 40px;
     height: 40px;
@@ -24,7 +24,7 @@
       border: none;
       width: 40px;
       height: 40px;
-
+      opacity: 0.6;
       .icon-profile {
         width: 40px;
         height: 40px;
@@ -101,7 +101,7 @@
   #buttonLoginRegister {
     flex-direction: column;
     margin-right: none;
-    margin-top: 20px;
+    //margin-top: 20px;
     #button {
       height: 30px;
       width: 60px;
