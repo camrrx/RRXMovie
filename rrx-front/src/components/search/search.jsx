@@ -70,6 +70,7 @@ const Search = (props) => {
             defaultValue={title_movie}
             className="researching"
             name="titleMovie"
+            autoComplete="off"
             onChange={handleNewResearch}
             onKeyPress={(e) => searchFromKey(e)}></input>
           <button

@@ -53,8 +53,10 @@ const Home = () => {
             id="movieSearch"
             name="titleMovie"
             className="search-input"
+            autoComplete="off"
             type="text"
             onChange={handleResearch}
+            required
           />
           <button
             type="submit"

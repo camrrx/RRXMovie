@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../search/search.scss";
 import { getMovieCredits } from "../../API/tmdbApi";
 import { getMovieDetails } from "../../API/tmdbApi";
+import silhouette from "../../img/silhouette.png";
 
 const MovieNote = (props) => {
   const movieSelected = useSelector((state) => state.movieSelected);
@@ -65,15 +66,17 @@ const MovieNote = (props) => {
       return (
         <div key={person.id}>
           <div className="casting-container">
-            {person.profile_path ? (
+            <div className="casting-img">
               <img
-                className="casting-img"
-                src={"https://image.tmdb.org/t/p/w780" + person.profile_path}
+                src={
+                  person.profile_path
+                    ? "https://image.tmdb.org/t/p/w780" + person.profile_path
+                    : silhouette
+                }
                 alt=""
               />
-            ) : (
-              <div className="casting-img-no-picture"></div>
-            )}
+            </div>
+
             <div className="casting-actor-container">
               <div
                 id={"actor-card-" + person.id}
@@ -118,6 +121,10 @@ const MovieNote = (props) => {
               dispatch({
                 type: "isDisplay/dontDisplayModal",
                 payload: false,
+              });
+              dispatch({
+                type: "movieSelected/addMovie",
+                payload: {},
               });
             }}>
             <span className="material-icons">clear</span>
