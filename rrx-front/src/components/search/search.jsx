@@ -69,7 +69,7 @@ const Search = (props) => {
             type="search"
             defaultValue={title_movie}
             className="researching"
-            name="title-movie"
+            name="titleMovie"
             onChange={handleNewResearch}
             onKeyPress={(e) => searchFromKey(e)}></input>
           <button
