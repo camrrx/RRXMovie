@@ -51,7 +51,7 @@ const Home = () => {
           <input
             placeholder="Interstellar, Avatar ..."
             id="movieSearch"
-            name="title-movie"
+            name="titleMovie"
             className="search-input"
             type="text"
             onChange={handleResearch}

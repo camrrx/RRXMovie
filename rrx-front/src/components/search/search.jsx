@@ -14,7 +14,7 @@ const Search = (props) => {
   const movieResearch = useSelector((state) => state.movieResearch);
   const [researchingMovie, setResearchingMovie] = useState("");
   const title_movie = new URLSearchParams(useLocation().search).get(
-    "title-movie"
+    "titleMovie"
   );
   //state for getting all the movies from the api
   const [allMovies, setAllMovies] = useState([]);
@@ -22,12 +22,11 @@ const Search = (props) => {
   //if second parameter change, use effect will be reload
   useEffect(() => {
     //getting the list of movies from search component
-    console.log(title_movie);
     setResearchingMovie(title_movie);
     if (title_movie.length) {
       search(title_movie);
     }
-  }, [props.moviesParam, movieResearch, setResearchingMovie]);
+  }, [props.moviesParam, title_movie, setResearchingMovie]);
 
   //event to update researchMovie when the 'input' is modified (onChange)
   const handleNewResearch = (research) => {
