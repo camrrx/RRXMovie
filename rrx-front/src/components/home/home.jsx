@@ -47,28 +47,27 @@ const Home = () => {
             </div>
           )}
         </div>
-        <form className="search-home-container">
+        <form action="/search" className="search-home-container">
           <input
             placeholder="Interstellar, Avatar ..."
             id="movieSearch"
+            name="title-movie"
             className="search-input"
             type="text"
             onChange={handleResearch}
           />
-
-          <Link to="/search">
-            <button
-              className="search-button"
-              onClick={() => {
-                //On click, the text written in the input will be store in the redux store to be used in search page
-                dispatch({
-                  type: "movieResearch/getMovie",
-                  payload: { research },
-                });
-              }}>
-              <span className="material-icons">search</span>
-            </button>
-          </Link>
+          <button
+            type="submit"
+            className="search-button"
+            onClick={() => {
+              //On click, the text written in the input will be store in the redux store to be used in search page
+              dispatch({
+                type: "movieResearch/getMovie",
+                payload: { research },
+              });
+            }}>
+            <span className="material-icons">search</span>
+          </button>
         </form>
       </div>
     </div>

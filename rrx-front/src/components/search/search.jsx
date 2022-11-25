@@ -6,23 +6,26 @@ import logo from "../../img/rrxLogo.png";
 
 import "./search.scss";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Search = (props) => {
   //useState is used to modify in direct a state
   //state for the researcher
   const movieResearch = useSelector((state) => state.movieResearch);
   const [researchingMovie, setResearchingMovie] = useState("");
-
+  const title_movie = new URLSearchParams(useLocation().search).get(
+    "title-movie"
+  );
   //state for getting all the movies from the api
   const [allMovies, setAllMovies] = useState([]);
 
   //if second parameter change, use effect will be reload
   useEffect(() => {
     //getting the list of movies from search component
-    setResearchingMovie(movieResearch);
-    if (movieResearch.length) {
-      search(movieResearch);
+    console.log(title_movie);
+    setResearchingMovie(title_movie);
+    if (title_movie.length) {
+      search(title_movie);
     }
   }, [props.moviesParam, movieResearch, setResearchingMovie]);
 
@@ -62,20 +65,23 @@ const Search = (props) => {
       </div>
 
       <div className="research-zone">
-        <input
-          type="search"
-          defaultValue={movieResearch}
-          className="researching"
-          onChange={handleNewResearch}
-          onKeyPress={(e) => searchFromKey(e)}></input>
-
-        <button
-          className="button-search"
-          onClick={() => {
-            search(researchingMovie);
-          }}>
-          <span className="material-icons">search</span>
-        </button>
+        <form action="/search" className="research-zone">
+          <input
+            type="search"
+            defaultValue={title_movie}
+            className="researching"
+            name="title-movie"
+            onChange={handleNewResearch}
+            onKeyPress={(e) => searchFromKey(e)}></input>
+          <button
+            type="submit"
+            className="button-search"
+            onClick={() => {
+              search(researchingMovie);
+            }}>
+            <span className="material-icons">search</span>
+          </button>
+        </form>
       </div>
 
       <div>
