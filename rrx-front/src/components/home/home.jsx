@@ -60,7 +60,7 @@ const Home = () => {
           />
           <button
             type="submit"
-            className="search-button"
+            className="search-button noSelect"
             onClick={() => {
               //On click, the text written in the input will be store in the redux store to be used in search page
               dispatch({

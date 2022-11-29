@@ -16,7 +16,7 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
       rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     margin-bottom: 1rem;
-    
+
     .poster-container {
       height: 400px;
       width: auto;
@@ -31,12 +31,16 @@
       display: flex;
       flex-direction: column;
       padding: 1rem;
-  
+
       .button-select {
         border-radius: 20px;
         height: 50px;
         border: none;
-        background: linear-gradient(90deg, rgba(121,8,59,1) 0%, rgba(7,15,74,1) 100%);
+        background: linear-gradient(
+          90deg,
+          rgba(121, 8, 59, 1) 0%,
+          rgba(7, 15, 74, 1) 100%
+        );
         color: white;
         font-size: 1.2rem;
         font-weight: 800;
@@ -46,8 +50,11 @@
         transition: 0.5sec;
         border-radius: 40px;
         opacity: 0.9;
-        background: linear-gradient(90deg, rgba(7,15,74,1) 0%, rgba(121,8,59,1) 100%);
-
+        background: linear-gradient(
+          90deg,
+          rgba(7, 15, 74, 1) 0%,
+          rgba(121, 8, 59, 1) 100%
+        );
       }
     }
   }
@@ -62,9 +69,5 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  top:0;
+  top: 0;
 }
-
-
-
-
