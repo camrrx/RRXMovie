@@ -67,6 +67,13 @@
       justify-content: center;
       align-items: center;
       transition: 0.4s;
+      background: linear-gradient(
+        90deg,
+        rgba(121, 8, 59, 1) 10%,
+        rgba(7, 15, 74, 1) 100%
+      );
+      color: white;
+      cursor: pointer;
     }
 
     .button-search:hover {
