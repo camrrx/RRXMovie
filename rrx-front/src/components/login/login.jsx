@@ -53,6 +53,7 @@ const Login = (props) => {
 					type: "loginUser/getLoginData",
 					payload: { usernameLogin: usernameLogin, successLogin: true },
 				});
+				localStorage.setItem("user", usernameLogin);
 			} else {
 				console.log("NOT SUCCESS");
 				dispatch({

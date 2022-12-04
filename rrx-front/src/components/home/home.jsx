@@ -2,6 +2,7 @@
 import "./home.scss";
 import { useDispatch } from "react-redux";
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import background from "../../img/jungleBook.jpeg";
 import LoginButton from "../loginButton/loginButton";
 import logo from "../../img/rrxLogoWhite.png";
@@ -9,9 +10,15 @@ import logo from "../../img/rrxLogoWhite.png";
 const Home = () => {
 	const dispatch = useDispatch();
 	const [research, setResearch] = useState("");
+	const navigate = useNavigate();
 
 	const handleResearch = (event) => {
 		setResearch(event.target.value);
+	};
+	const searchFromKey = (event) => {
+		if (event.key === "Enter") {
+			navigate("/search?titleMovie=" + research);
+		}
 	};
 
 	return (
@@ -39,7 +46,7 @@ const Home = () => {
 						<LoginButton />
 					</div>
 				</div>
-				<form action="/search" className="search-home-container">
+				<div className="search-home-container">
 					<input
 						placeholder="Interstellar, Avatar ..."
 						id="movieSearch"
@@ -48,10 +55,11 @@ const Home = () => {
 						autoComplete="off"
 						type="text"
 						onChange={handleResearch}
+						onKeyPress={(e) => searchFromKey(e)}
 						required
 					/>
-					<button
-						type="submit"
+					<Link
+						to={"/search?titleMovie=" + research}
 						className="search-button noSelect"
 						onClick={() => {
 							//On click, the text written in the input will be store in the redux store to be used in search page
@@ -62,8 +70,8 @@ const Home = () => {
 						}}
 					>
 						<span className="material-icons">search</span>
-					</button>
-				</form>
+					</Link>
+				</div>
 			</div>
 		</div>
 	);
