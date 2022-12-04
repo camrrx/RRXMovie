@@ -48,6 +48,14 @@ const userLoginSlice = createSlice({
 			};
 			return state;
 		},
+
+		logout: (state, action) => {
+			state = {
+				usernameLogin: "",
+				successLogin: false,
+			};
+			return state;
+		},
 	},
 });
 
