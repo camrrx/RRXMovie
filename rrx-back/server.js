@@ -34,19 +34,26 @@ app.post("/users/register", async (req, res) => {
 		const hashedPassword = await bcrypt.hash(req.body.password, 10);
 		//console.log(req.body)
 		const user = { email: req.body.email, username: req.body.username, password: hashedPassword };
-
-		db.query(
-			"INSERT INTO users (username, email, password) VALUE (?,?,?)",
-			[user.username, user.email, hashedPassword],
-			(err, result) => {
-				if (err) {
-					console.log(err);
-				} else {
-					//users.push(user);
-					res.send("Values inserted");
+		
+		const usernameAvailable = await isUsernameAvailable(user.username);
+		const emailAvailable = await isUsernameAvailable(user.email);
+		if(usernameAvailable && emailAvailable){
+			db.query(
+				"INSERT INTO users (username, email, password) VALUE (?,?,?)",
+				[user.username, user.email, hashedPassword],
+				(err, result) => {
+					if (err) {
+						console.log(err);
+					} else {
+						//users.push(user);
+						res.send("Values inserted");
+					}
 				}
-			}
-		);
+			);
+		} else {
+			console.log("This profile already exists");
+		}
+		
 	} catch {
 		res.status(500).send();
 	}
@@ -82,4 +89,32 @@ function getUserPassword(username) {
 	});
 }
 
+function isUsernameAvailable(username) {
+	return new Promise((resolve, reject) => {
+
+		db.query("SELECT username FROM users WHERE username = ?", [username], (err, result) => {
+			if (err || result.length) {
+				console.log("Error while tryin to register");
+				return reject(false);
+			}
+			else {
+				return resolve(true);
+			}
+		});
+	})
+}
+function isEmailAvailable(email) {
+	return new Promise((resolve, reject) => {
+
+		db.query("SELECT email FROM users WHERE email = ?", [email], (err, result) => {
+			if (err || result.length) {
+				console.log("Error while tryin to register");
+				return reject(false);
+			}
+			else {
+				return resolve(true);
+			}
+		});
+	})
+}
 app.listen(9000);
