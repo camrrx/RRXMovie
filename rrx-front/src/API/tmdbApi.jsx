@@ -43,7 +43,7 @@ export const getMovieDetails = async (movie_id) => {
       API_URL + "/movie/" + movie_id + "?" + API_KEY + "&language=fr-FR"
     );
 
-    console.log(res.data);
+    //console.log(res.data);
     return res.data;
   } catch (e) {
     console.log(e);

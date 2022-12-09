@@ -36,7 +36,7 @@ app.post("/users/register", async (req, res) => {
 		const user = { email: req.body.email, username: req.body.username, password: hashedPassword };
 		
 		const usernameAvailable = await isUsernameAvailable(user.username);
-		const emailAvailable = await isUsernameAvailable(user.email);
+		const emailAvailable = await isEmailAvailable(user.email);
 		if(usernameAvailable && emailAvailable){
 			db.query(
 				"INSERT INTO users (username, email, password) VALUE (?,?,?)",
@@ -76,12 +76,41 @@ app.post("/users/login", async (req, res) => {
 	}
 });
 
+app.get("/movies", async (req, res) => {
+	return new Promise((resolve, reject) => {
+		db.query("SELECT * FROM movies WHERE users_idusers = ?", [req.id], (err, result) => {
+			if (err || !result.length) {
+				return err ? err : null;
+			} else {
+				return resolve(result);
+			}
+		});
+	});
+});
+
+app.post("/movies", async (req, res) => {
+	const movie = { id_movie: req.body.idMovie, name: req.body.nameMovie, rate: req.body.rateMovie,  genre: req.body.genreMovie ,  users_id: req.body.userId  };
+	return new Promise((resolve, reject) => {
+		db.query("INSERT INTO movies (id_movie, name, rate, genre, users_idusers) VALUE (?,?,?,?,?)",
+		[movie.id_movie, movie.name, movie.rate,movie.genre,movie.users_id], (err, result) => {
+			if (err) {
+				console.log(err);
+				return reject(err);
+			} else {
+				res.send("Values inserted");
+				return resolve(result);
+			}
+		});
+	});
+});
+
+
 function getUserPassword(username) {
 	return new Promise((resolve, reject) => {
 		db.query("SELECT password FROM users WHERE username = ?", [username], (err, result) => {
 			if (err || !result.length) {
 				console.log("Error while tryin to login");
-				return err ? err : null;
+				return err ? reject(err) : null;
 			} else {
 				return resolve(result[0].password);
 			}
@@ -94,7 +123,7 @@ function isUsernameAvailable(username) {
 
 		db.query("SELECT username FROM users WHERE username = ?", [username], (err, result) => {
 			if (err || result.length) {
-				console.log("Error while tryin to register");
+				console.log("Error while tryin to register : the username already exists");
 				return reject(false);
 			}
 			else {
@@ -108,7 +137,7 @@ function isEmailAvailable(email) {
 
 		db.query("SELECT email FROM users WHERE email = ?", [email], (err, result) => {
 			if (err || result.length) {
-				console.log("Error while tryin to register");
+				console.log("Error while tryin to register : the email already exists");
 				return reject(false);
 			}
 			else {
@@ -117,4 +146,22 @@ function isEmailAvailable(email) {
 		});
 	})
 }
+
+app.get("/rate/:idUser/:idMovie", async (req, res) => {
+	const idUser = req.params.idUser;
+	const idMovie = req.params.idMovie;
+
+	db.query("SELECT rate FROM movies WHERE users_idusers = ? AND id_movie = ? ", [idUser, idMovie], (err, result) => {
+		if (err) {
+			console.log("Error");
+			res.status(500).send(err);
+		}
+		else if (result.length) {
+			res.status(200).send(result[0].rate.toString());
+		} else {
+			res.status(200).send(null);
+		}
+	})
+});
+
 app.listen(9000);

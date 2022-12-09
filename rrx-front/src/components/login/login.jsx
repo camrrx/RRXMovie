@@ -28,9 +28,7 @@ const Login = (props) => {
     // redirect user to login page if registration was successful
     if (loginUserData.successLogin) {
       navigate("/home");
-      console.log(" OK");
     } else {
-      console.log("PAS OK");
     }
   }, [navigate, loginUserData]);
 
@@ -46,7 +44,6 @@ const Login = (props) => {
         },
         config
       );
-      console.log("res", res);
       if (res.data === "Success") {
         console.log("SUCCESS");
         dispatch({

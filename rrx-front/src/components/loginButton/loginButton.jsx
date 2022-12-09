@@ -59,16 +59,16 @@ const LoginButton = (props) => {
             {isComponentVisible ? (
               <div className="button-login-register" id="buttonLoginRegister">
                 <Link to="/login">
-                  <button id="button">Log in</button>
+                  <button className="button-profile">Log in</button>
                 </Link>
                 <Link to="/register">
-                  <button id="button">Register</button>
+                  <button className="button-profile">Register</button>
                 </Link>
               </div>
             ) : null}
           </div>
         ) : (
-          <div>
+          <div className="button-profile-container">
             <button
               className="button-profile-username"
               id="buttonProfileUsername"
@@ -77,11 +77,11 @@ const LoginButton = (props) => {
               {usernameLogin}
             </button>
             {isComponentVisible ? (
-              <div className="button-login-register">
+              <div className="button-login-register" id="buttonLoginRegister">
                 {/* <Link to="/Profile"> */}
-                <button id="button">Profile</button>
+                <button className="button-profile">Profile</button>
                 {/* </Link> */}
-                <button id="button" onClick={logout}>
+                <button className="button-profile" onClick={logout}>
                   Log out
                 </button>
               </div>

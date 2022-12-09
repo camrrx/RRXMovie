@@ -4,159 +4,248 @@ import "../search/search.scss";
 import { getMovieCredits } from "../../API/tmdbApi";
 import { getMovieDetails } from "../../API/tmdbApi";
 import silhouette from "../../img/silhouette.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const MovieNote = (props) => {
-	const [valueSlider, setValueSlider] = React.useState(5);
-	const [castMovie, setCastMovie] = useState({});
-	const [characterActor, setCharacterActor] = useState("");
-	const [detailsMovie, setDetailsMovie] = useState({});
+  const [valueSlider, setValueSlider] = useState("");
+  const [castMovie, setCastMovie] = useState({});
+  const [detailsMovie, setDetailsMovie] = useState({});
+  const loginUserData = useSelector((state) => state.loginUser);
+  const [movieId, setMovieId] = useState("");
+  const [ratingDone, setRatingDone] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const paramsURL = new URLSearchParams(location.search);
+  const research = paramsURL.get("titleMovie");
+  const usernameLogin = useSelector((state) => state.loginUser.usernameLogin);
 
-	useEffect(() => {
-		dynamicSlider(valueSlider);
+  const API_MOVIE_URL = "http://localhost:9000/movies/";
+  const API_RATE_URL = "http://localhost:9000/rate";
 
-		if (props.movie_id) {
-			getCastMovie(props.movie_id);
-			getDetailsMovie(props.movie_id);
-		}
-	}, [props, valueSlider]);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  useEffect(() => {
+    console.log(props.movie_id);
+    if (props.movie_id) {
+      getCastMovie(props.movie_id);
+      getDetailsMovie(props.movie_id);
+      setMovieId(props.movie_id);
 
-	/*Creation of the dynamic slider*/
-	const dynamicSlider = (valueSlider) => {
-		const active = "rgba(121,8,59,1)";
-		const inactive = "#dbdbdb";
+      usernameLogin &&
+        getRatingMovie(usernameLogin, props.movie_id.toString()).then((res) => {
+          setValueSlider(res.data);
+          console.log("thibaut", res);
+          if (!res.data) {
+            console.log("sfjsfsf");
+            setValueSlider("5");
+            dynamicSlider(5);
+          } else {
+            console.log("cam");
+            dynamicSlider(res.data);
+          }
+        });
+    }
+  }, [props.movie_id]);
 
-		const newBackgroundStyle = `linear-gradient(90deg, ${active} 0% ${valueSlider * 10}%, ${inactive} ${
-			valueSlider * 10
-		}% 100%)`;
+  /*Creation of the dynamic slider*/
+  const dynamicSlider = (valueSlider) => {
+    console.log(valueSlider);
+    const active = "rgba(121,8,59,1)";
+    const inactive = "#dbdbdb";
 
-		document.getElementById("dynamicRange").style.background = newBackgroundStyle;
-	};
+    const newBackgroundStyle = `linear-gradient(90deg, ${active} 0% ${
+      valueSlider * 10
+    }%, ${inactive} ${valueSlider * 10}% 100%)`;
 
-	/*Get the casting of the movie and set it into a state*/
-	const getCastMovie = (idMovie) => {
-		getMovieCredits(idMovie).then((casting) => {
-			setCastMovie(casting.cast);
-		});
-	};
+    document.getElementById("dynamicRange").style.background =
+      newBackgroundStyle;
+  };
 
-	/*Choose if we'll display the actor or the character depending on a click action*/
-	const actorOrCharacter = (person) => {
-		let element = document.getElementById("actor-card-" + person.id);
-		let res;
-		element.innerHTML === person.name ? (res = person.character) : (res = person.name);
+  /*Get the casting of the movie and set it into a state*/
+  const getCastMovie = (idMovie) => {
+    getMovieCredits(idMovie).then((casting) => {
+      setCastMovie(casting.cast);
+    });
+  };
 
-		element.innerHTML = res;
-		// characterActor === person.actor
-		//   ? setCharacterActor(person.character)
-		//   : setCharacterActor(person.name);
-	};
+  /*Choose if we'll display the actor or the character depending on a click action*/
+  const actorOrCharacter = (person) => {
+    let element = document.getElementById("actor-card-" + person.id);
+    let res;
+    element.innerHTML === person.name
+      ? (res = person.character)
+      : (res = person.name);
 
-	const displayActorCard = () => {
-		return Object.keys(castMovie).map((key) => {
-			let person = castMovie[key];
-			return (
-				<div key={person.id}>
-					<div className="casting-container">
-						<div className="casting-img">
-							<img
-								src={person.profile_path ? "https://image.tmdb.org/t/p/w780" + person.profile_path : silhouette}
-								alt=""
-							/>
-						</div>
+    element.innerHTML = res;
+    // characterActor === person.actor
+    //   ? setCharacterActor(person.character)
+    //   : setCharacterActor(person.name);
+  };
 
-						<div className="casting-actor-container">
-							<div
-								id={"actor-card-" + person.id}
-								className="casting-actor-div"
-								onClick={() => {
-									actorOrCharacter(person);
-								}}
-							>
-								{person.name}
-							</div>
-						</div>
-					</div>
-				</div>
-			);
-		});
-	};
-	/*Get the details of the movie and set it into a state*/
-	const getDetailsMovie = (idMovie) => {
-		getMovieDetails(idMovie).then((details) => {
-			setDetailsMovie(details);
-		});
-	};
+  const displayActorCard = () => {
+    return Object.keys(castMovie).map((key) => {
+      let person = castMovie[key];
+      return (
+        <div key={person.id}>
+          <div className="casting-container">
+            <div className="casting-img">
+              <img
+                src={
+                  person.profile_path
+                    ? "https://image.tmdb.org/t/p/w780" + person.profile_path
+                    : silhouette
+                }
+                alt=""
+              />
+            </div>
 
-	return (
-		<div id="modal-container-id" className="modal-container">
-			<div className="background-modal-overlay"></div>
+            <div className="casting-actor-container">
+              <div
+                id={"actor-card-" + person.id}
+                className="casting-actor-div"
+                onClick={() => {
+                  actorOrCharacter(person);
+                }}>
+                {person.name}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
 
-			<div className="background-modal">
-				<img
-					src={
-						detailsMovie && detailsMovie.backdrop_path
-							? "https://image.tmdb.org/t/p/w500/" + detailsMovie.backdrop_path
-							: ""
-					}
-					alt=""
-				/>
-			</div>
-			<div className="info-container">
-				<div id="button-container-id" className="button-container">
-					<Link to={"/search?titleMovie=" + props.title_movie}>
-						<div className="button-close">
-							<span className="material-icons">clear</span>
-						</div>
-					</Link>
-				</div>
-				<div className="movie-and-genre-container">
-					<div id="title-movie-id" className="title-movie-container">
-						{detailsMovie.title}
-					</div>
-					<div className="genre-container">
-						{detailsMovie.genres
-							? detailsMovie.genres.map((genre, index) => {
-									return (
-										<div key={genre.id} className="details-movie-genre">
-											{genre.name}
-										</div>
-									);
-							  })
-							: ""}
-					</div>
-				</div>
-				<div className="description-container">
-					{detailsMovie.overview ? <p>{detailsMovie.overview} </p> : <p>This movie does not have any description</p>}
-				</div>
+  /*Get the details of the movie and set it into a state*/
+  const getDetailsMovie = (idMovie) => {
+    getMovieDetails(idMovie).then((details) => {
+      setDetailsMovie(details);
+    });
+  };
 
-				<div className="actor-card-container">
-					<div className="casting-movie-container">{displayActorCard()}</div>
-				</div>
+  const ratingMovie = async (movieRate) => {
+    try {
+      const idMovie = movieId;
+      const nameMovie = detailsMovie.title;
+      const rateMovie = movieRate;
+      const genreMovie = "action";
+      const userId = loginUserData.usernameLogin;
 
-				<div className="slidecontainer">
-					<input
-						id="dynamicRange"
-						className="slider"
-						type="range"
-						min="0"
-						max="10"
-						value={valueSlider}
-						onChange={(e) => {
-							setValueSlider(e.target.value);
-							dynamicSlider(e.target.value);
-						}}
-					/>
-				</div>
+      if (!userId) {
+        setRatingDone("NOK");
+        return console.log("This action is not possible, please login before");
+      }
+      setRatingDone("OK");
+      await axios.post(
+        API_MOVIE_URL,
+        {
+          idMovie,
+          nameMovie,
+          rateMovie,
+          genreMovie,
+          userId,
+        },
+        config
+      );
+    } catch (err) {
+      console.log("error register", err);
+    }
+    navigate("/search?titleMovie=" + research);
+  };
 
-				<div className="container-rating-movie">
-					<button className="button-to-rate">
-						<h1 className="rating-movie">{valueSlider}</h1>
-					</button>
-				</div>
-			</div>
-		</div>
-	);
+  const getRatingMovie = async (idUser, idMovie) => {
+    try {
+      let res = axios.get(API_RATE_URL + "/" + idUser + "/" + idMovie, config);
+      return res;
+    } catch (err) {
+      console.log("error register", err);
+    }
+  };
+
+  return (
+    <div id="modal-container-id" className="modal-container">
+      <div className="background-modal-overlay"></div>
+
+      <div className="background-modal">
+        <img
+          src={
+            detailsMovie && detailsMovie.backdrop_path
+              ? "https://image.tmdb.org/t/p/w500/" + detailsMovie.backdrop_path
+              : ""
+          }
+          alt=""
+        />
+      </div>
+      <div className="info-container">
+        <div id="button-container-id" className="button-container">
+          <Link to={"/search?titleMovie=" + props.title_movie}>
+            <div className="button-close">
+              <span className="material-icons">clear</span>
+            </div>
+          </Link>
+        </div>
+        <div className="movie-and-genre-container">
+          <div id="title-movie-id" className="title-movie-container">
+            {detailsMovie.title}
+          </div>
+          <div className="genre-container">
+            {detailsMovie.genres
+              ? detailsMovie.genres.map((genre, index) => {
+                  return (
+                    <div key={genre.id} className="details-movie-genre">
+                      {genre.name}
+                    </div>
+                  );
+                })
+              : ""}
+          </div>
+        </div>
+        <div className="description-container">
+          {detailsMovie.overview ? (
+            <p>{detailsMovie.overview} </p>
+          ) : (
+            <p>This movie does not have any description</p>
+          )}
+        </div>
+
+        <div className="actor-card-container">
+          <div className="casting-movie-container">{displayActorCard()}</div>
+        </div>
+
+        <div className="slidecontainer">
+          <input
+            id="dynamicRange"
+            className="slider"
+            type="range"
+            min="0"
+            max="10"
+            value={valueSlider}
+            onChange={(e) => {
+              setValueSlider(e.target.value);
+              dynamicSlider(e.target.value);
+            }}
+          />
+        </div>
+
+        <div className="container-rating-movie">
+          <button
+            className="button-to-rate"
+            onClick={() => {
+              ratingMovie(valueSlider);
+            }}>
+            <h1 className="rating-movie">{valueSlider}</h1>
+          </button>
+          {ratingDone === "NOK" && (
+            <p>This action is not possible, please login before</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default MovieNote;

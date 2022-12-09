@@ -42,7 +42,8 @@
     display: flex;
     column-gap: 5px;
     row-gap: 5px;
-    button {
+
+    .button-profile {
       border: none;
       background: linear-gradient(
         90deg,
@@ -98,7 +99,7 @@
     width: 15%;
     margin-right: none;
   }
-  #buttonLoginRegister {
+  .buttonLoginRegister {
     flex-direction: column;
     margin-right: none;
     //margin-top: 20px;
