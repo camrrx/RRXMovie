@@ -104,6 +104,23 @@ app.post("/movies", async (req, res) => {
 	});
 });
 
+app.post("/movies/update", async (req, res) => {
+	const movie = { id_movie: req.body.idMovie,  rate: req.body.rateMovie,   users_id: req.body.userId  };
+
+	return new Promise((resolve, reject) => {
+		db.query("UPDATE movies SET rate = ? WHERE users_idusers = ? AND id_movie=?", [movie.rate, movie.users_id, movie.id_movie], (err, result) => {
+			if (err) {
+				console.log(err);
+				return reject(err);
+			} else {
+				res.send("Values inserted");
+				return resolve(result);
+			}
+	})
+		
+	});
+
+});
 
 function getUserPassword(username) {
 	return new Promise((resolve, reject) => {

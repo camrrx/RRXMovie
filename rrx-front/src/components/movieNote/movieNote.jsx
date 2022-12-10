@@ -21,7 +21,7 @@ const MovieNote = (props) => {
   const research = paramsURL.get("titleMovie");
   const usernameLogin = useSelector((state) => state.loginUser.usernameLogin);
 
-  const API_MOVIE_URL = "http://localhost:9000/movies/";
+  let API_MOVIE_URL = "http://localhost:9000/movies/";
   const API_RATE_URL = "http://localhost:9000/rate";
 
   const config = {
@@ -36,25 +36,25 @@ const MovieNote = (props) => {
       getDetailsMovie(props.movie_id);
       setMovieId(props.movie_id);
 
-      usernameLogin &&
+      if (usernameLogin) {
         getRatingMovie(usernameLogin, props.movie_id.toString()).then((res) => {
           setValueSlider(res.data);
-          console.log("thibaut", res);
           if (!res.data) {
-            console.log("sfjsfsf");
             setValueSlider("5");
             dynamicSlider(5);
           } else {
-            console.log("cam");
             dynamicSlider(res.data);
           }
         });
+      } else {
+        setValueSlider("5");
+        dynamicSlider(5);
+      }
     }
-  }, [props.movie_id]);
+  }, [props.movie_id, usernameLogin]);
 
   /*Creation of the dynamic slider*/
   const dynamicSlider = (valueSlider) => {
-    console.log(valueSlider);
     const active = "rgba(121,8,59,1)";
     const inactive = "#dbdbdb";
 
@@ -82,9 +82,6 @@ const MovieNote = (props) => {
       : (res = person.name);
 
     element.innerHTML = res;
-    // characterActor === person.actor
-    //   ? setCharacterActor(person.character)
-    //   : setCharacterActor(person.name);
   };
 
   const displayActorCard = () => {
@@ -140,17 +137,34 @@ const MovieNote = (props) => {
         return console.log("This action is not possible, please login before");
       }
       setRatingDone("OK");
-      await axios.post(
-        API_MOVIE_URL,
-        {
-          idMovie,
-          nameMovie,
-          rateMovie,
-          genreMovie,
-          userId,
-        },
-        config
-      );
+      getRatingMovie(userId, idMovie).then((res) => {
+        console.log(res);
+        if (res.data) {
+          console.log("update");
+          axios.post(
+            API_MOVIE_URL + "update",
+            {
+              idMovie,
+              rateMovie,
+              userId,
+            },
+            config
+          );
+        } else {
+          console.log("create");
+          axios.post(
+            API_MOVIE_URL,
+            {
+              idMovie,
+              nameMovie,
+              rateMovie,
+              genreMovie,
+              userId,
+            },
+            config
+          );
+        }
+      });
     } catch (err) {
       console.log("error register", err);
     }
