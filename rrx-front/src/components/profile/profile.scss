@@ -1,0 +1,27 @@
+.header-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+
+  .logo-rrx {
+    display: flex;
+    height: 45px;
+    padding-left: 1rem;
+    padding-top: 1rem;
+  }
+  .title-container {
+    display: flex;
+    align-items: center;
+    gap: 0rem;
+    .title-rrx {
+      margin: 0;
+      font-size: 3rem;
+      color: rgb(121, 8, 59);
+      font-family: "Secular One", sans-serif;
+      cursor: pointer;
+    }
+  }
+}

@@ -181,4 +181,21 @@ app.get("/rate/:idUser/:idMovie", async (req, res) => {
 	})
 });
 
+app.get("/rate/:idUser", async (req, res) => {
+	const idUser = req.params.idUser;
+
+	db.query("SELECT * FROM movies WHERE users_idusers = ?", [idUser], (err, result) => {
+		console.log(result);
+		if (err) {
+			console.log("Error");
+			res.status(500).send(err);
+		}
+		else if (result.length) {
+			res.status(200).send(result);
+		} else {
+			res.status(200).send(null);
+		}
+	})
+});
+
 app.listen(9000);

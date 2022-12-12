@@ -15,6 +15,7 @@ const MovieNote = (props) => {
   const loginUserData = useSelector((state) => state.loginUser);
   const [movieId, setMovieId] = useState("");
   const [ratingDone, setRatingDone] = useState("");
+  const [gettingRate, setGettingRate] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const paramsURL = new URLSearchParams(location.search);
@@ -30,22 +31,22 @@ const MovieNote = (props) => {
     },
   };
   useEffect(() => {
-    console.log(props.movie_id);
     if (props.movie_id) {
       getCastMovie(props.movie_id);
       getDetailsMovie(props.movie_id);
       setMovieId(props.movie_id);
-
       if (usernameLogin) {
-        getRatingMovie(usernameLogin, props.movie_id.toString()).then((res) => {
-          setValueSlider(res.data);
-          if (!res.data) {
-            setValueSlider("5");
-            dynamicSlider(5);
-          } else {
-            dynamicSlider(res.data);
-          }
-        });
+        getRatingMovie(usernameLogin, props.movie_id.toString())
+          .then(setGettingRate(true))
+          .then((res) => {
+            setValueSlider(res.data);
+            if (!res.data) {
+              setValueSlider("5");
+              dynamicSlider(5);
+            } else {
+              dynamicSlider(res.data);
+            }
+          });
       } else {
         setValueSlider("5");
         dynamicSlider(5);
@@ -84,6 +85,7 @@ const MovieNote = (props) => {
     element.innerHTML = res;
   };
 
+  /*Display the card of the actors and manage if we display the actor or the character by clicking on it*/
   const displayActorCard = () => {
     return Object.keys(castMovie).map((key) => {
       let person = castMovie[key];
@@ -124,6 +126,7 @@ const MovieNote = (props) => {
     });
   };
 
+  /* To rate the movie, if the movie has already been rated : update the rate, else create the rate in the DB */
   const ratingMovie = async (movieRate) => {
     try {
       const idMovie = movieId;
@@ -171,6 +174,7 @@ const MovieNote = (props) => {
     navigate("/search?titleMovie=" + research);
   };
 
+  /*To check if the movie has already been rating, if yes get the rate*/
   const getRatingMovie = async (idUser, idMovie) => {
     try {
       let res = axios.get(API_RATE_URL + "/" + idUser + "/" + idMovie, config);
@@ -180,7 +184,7 @@ const MovieNote = (props) => {
     }
   };
 
-  return (
+  return gettingRate ? (
     <div id="modal-container-id" className="modal-container">
       <div className="background-modal-overlay"></div>
 
@@ -259,6 +263,8 @@ const MovieNote = (props) => {
         </div>
       </div>
     </div>
+  ) : (
+    ""
   );
 };
 

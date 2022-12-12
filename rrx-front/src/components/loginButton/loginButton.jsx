@@ -78,9 +78,9 @@ const LoginButton = (props) => {
             </button>
             {isComponentVisible ? (
               <div className="button-login-register" id="buttonLoginRegister">
-                {/* <Link to="/Profile"> */}
-                <button className="button-profile">Profile</button>
-                {/* </Link> */}
+                <Link to="/Profile">
+                  <button className="button-profile">Profile</button>
+                </Link>
                 <button className="button-profile" onClick={logout}>
                   Log out
                 </button>
