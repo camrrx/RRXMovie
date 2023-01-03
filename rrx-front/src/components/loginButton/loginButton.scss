@@ -1,7 +1,8 @@
 .button-profile-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+
   .button-profile {
     display: flex;
     align-items: center;
@@ -40,8 +41,8 @@
 
   .button-login-register {
     display: flex;
+    justify-content: flex-end;
     column-gap: 5px;
-    row-gap: 5px;
 
     .button-profile {
       border: none;

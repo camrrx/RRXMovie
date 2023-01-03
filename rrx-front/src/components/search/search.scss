@@ -4,11 +4,10 @@
 
   .header-container {
     width: 100%;
+    border: none;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border: none;
 
     .logo-rrx {
       display: flex;
@@ -36,9 +35,12 @@
       }
     }
     .sign-in {
+      margin-right: 12px;
+      margin-bottom: 12px;
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
+      margin-top: 12px;
     }
   }
 

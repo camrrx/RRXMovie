@@ -65,12 +65,8 @@
         margin-top: 12px;
 
         button {
-          margin-right: 12px;
           border: 1px solid white;
           background: none;
-          width: 100px;
-          height: 40px;
-          border-radius: 40px;
           color: white;
           cursor: pointer;
         }
@@ -82,11 +78,6 @@
             rgba(7, 15, 74, 1) 100%
           );
           color: white;
-        }
-
-        .buttonMenu {
-          margin-top: 12px;
-          margin-right: 12px;
         }
       }
     }
