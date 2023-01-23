@@ -135,7 +135,8 @@ const MovieNote = (props) => {
       const rateMovie = movieRate;
       const genreMovie = "action";
       const userId = loginUserData.usernameLogin;
-
+      const pictureMovie = detailsMovie.backdrop_path;
+      console.log("details", detailsMovie, detailsMovie.backdrop_path);
       if (!userId) {
         setRatingDone("NOK");
         return console.log("This action is not possible, please login before");
@@ -164,6 +165,7 @@ const MovieNote = (props) => {
               rateMovie,
               genreMovie,
               userId,
+              pictureMovie,
             },
             config
           );

@@ -78,12 +78,14 @@ const LoginButton = (props) => {
             </button>
             {isComponentVisible ? (
               <div className="button-login-register" id="buttonLoginRegister">
-                <Link to="/Profile">
+                <Link to="/profile">
                   <button className="button-profile">Profile</button>
                 </Link>
-                <button className="button-profile" onClick={logout}>
-                  Log out
-                </button>
+                <Link to="/home">
+                  <button className="button-profile" onClick={logout}>
+                    Log out
+                  </button>{" "}
+                </Link>
               </div>
             ) : null}
           </div>

@@ -89,10 +89,10 @@ app.get("/movies", async (req, res) => {
 });
 
 app.post("/movies", async (req, res) => {
-	const movie = { id_movie: req.body.idMovie, name: req.body.nameMovie, rate: req.body.rateMovie,  genre: req.body.genreMovie ,  users_id: req.body.userId  };
+	const movie = { id_movie: req.body.idMovie, name: req.body.nameMovie, rate: req.body.rateMovie,  genre: req.body.genreMovie ,  users_id: req.body.userId , picture: req.body.pictureMovie };
 	return new Promise((resolve, reject) => {
-		db.query("INSERT INTO movies (id_movie, name, rate, genre, users_idusers) VALUE (?,?,?,?,?)",
-		[movie.id_movie, movie.name, movie.rate,movie.genre,movie.users_id], (err, result) => {
+		db.query("INSERT INTO movies (id_movie, name, rate, genre, users_idusers, picture) VALUE (?,?,?,?,?,?)",
+		[movie.id_movie, movie.name, movie.rate,movie.genre,movie.users_id, movie.picture], (err, result) => {
 			if (err) {
 				console.log(err);
 				return reject(err);
