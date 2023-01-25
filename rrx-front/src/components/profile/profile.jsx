@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./profile.scss";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import LoginButton from "../loginButton/loginButton";
 import logo from "../../img/rrxLogo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import MovieNote from "../movieNote/movieNote";
 
-const Profile = () => {
-  const usernameLogin = useSelector((state) => state.loginUser.usernameLogin);
+const Profile = (props) => {
+  //const usernameLogin = useSelector((state) => state.loginUser.usernameLogin);
   const [movieRated, setMovieRated] = useState({});
+  const location = useLocation();
+  const paramsURL = new URLSearchParams(location.search);
+  const getUserURL = paramsURL.get("user");
+  const getMovie_id = paramsURL.get("movie_id");
+
+  const dispatch = useDispatch();
 
   const API_MOVIE_RATED_URL = "http://localhost:9000/rate";
   const config = {
@@ -17,36 +24,48 @@ const Profile = () => {
     },
   };
   useEffect(() => {
-    getMovieRated(usernameLogin).then((res) => {
+    getMovieRated().then((res) => {
       setMovieRated(res.data);
     });
-    // .then((movieRated) => {
-    //   sortRatedMovies(movieRated);
-    // });
-  }, [usernameLogin]);
 
-  const getMovieRated = async (idUser) => {
+    if (getMovie_id) {
+      document.getElementsByTagName("body")[0].style.overflow = "hidden";
+      document.getElementById("profileContainer").style.overflow = "no-scroll";
+    } else {
+      document.getElementsByTagName("body")[0].style.overflow = "auto";
+      document.getElementById("profileContainer").style.overflow = "auto";
+    }
+  }, []);
+
+  const getMovieRated = async () => {
     try {
-      let res = axios.get(API_MOVIE_RATED_URL + "/" + idUser, config);
-      //console.log("res", res);
+      let res = await axios.get(API_MOVIE_RATED_URL + "/" + getUserURL, config);
+      console.log("res", res.data);
       return res;
     } catch (err) {
       console.log("error register", err);
     }
   };
 
-  // const compareNombres = (a, b) => {
-  //   console.log(a);
-  //   return a.rate - b.rate;
-  // };
+  const sortRatedMovies = () => {
+    let movieRatedSorted = Object.entries(movieRated).sort(
+      (a, b) => b[1].rate - a[1].rate
+    );
+    console.log("movieRatedSorted", movieRatedSorted);
+    return movieRatedSorted;
+  };
 
-  // const sortRatedMovies = (a, b) => {
-  //   console.log("sorting", movieRated);
-  //   return movieRated.sort(compareNombres(a, b));
-  // };
+  const getBestMovie = () => {
+    return sortRatedMovies()[0][1].picture;
+  };
+
+  const getTitleById = (id) => {
+    let movie = Object.entries(movieRated).find((x) => x[1].id_movie === id);
+    return movie[1].name;
+  };
 
   return (
-    <div className="profile-container">
+    <div className="profile-container" id="profileContainer">
       <div className="header-container">
         <div className="title-container">
           <Link to="/home">
@@ -54,37 +73,62 @@ const Profile = () => {
               <img className="logo-rrx" src={logo} alt="" />{" "}
             </div>
           </Link>
-          <div className="text-movie">
-            <p>
-              <small>The</small> Movie Ratings App
-            </p>
-          </div>
         </div>
 
         <div className="header-end">
           <LoginButton />
         </div>
       </div>
-      <div className="classement-container">
-        {Object.entries(movieRated).map((movie) => {
+
+      <div
+        className="classement-container"
+        // style={{
+        //   backgroundImage: ` linear-gradient(
+        //          rgba(0, 0, 0, 0.3),
+        //          rgba(0, 0, 0, 0.3)
+        //        ),url(${
+        //          "https://image.tmdb.org/t/p/original/" + getBestMovie()
+        //        })`,
+        // }}
+      >
+        {sortRatedMovies().map((movie) => {
           return (
-            <div
-              className="movies-rated-container"
-              id={movie[1].idRate}
-              style={{
-                backgroundImage: ` linear-gradient(
-                  rgba(121, 8, 59, 0.4),
-                  rgba(7, 15, 74, 0.4) 
-                ), url(${
-                  "https://image.tmdb.org/t/p/w500/" + movie[1].picture
-                })`,
-              }}>
-              <div className="movie-name"> {movie[1].name}</div>
-              <div className="movie-name"> {movie[1].rate} </div>
-            </div>
+            <Link
+              key={movie[1].id_movie}
+              to={
+                "/profile?user=" + getUserURL + "&movie_id=" + movie[1].id_movie
+              }>
+              <div
+                className="movies-rated-container"
+                id={movie[1].idRate}
+
+                // style={{
+                //   backgroundImage: ` linear-gradient(
+                //     rgba(121, 8, 59, 0.4),
+                //     rgba(7, 15, 74, 0.4)
+                //   ),
+                //    url(${
+                //     "https://image.tmdb.org/t/p/w500/" + movie[1].picture
+                //     })
+                //   `,
+                // }}
+              >
+                <div className="movie-name"> {movie[1].name}</div>
+                <div className="movie-name"> {movie[1].rate} </div>
+              </div>
+            </Link>
           );
         })}
       </div>
+
+      {getMovie_id ? (
+        //If isDisplay is true, display the MovieNote component related to the movie selected
+        <div className="movie-note">
+          <MovieNote movie_id={getMovie_id}></MovieNote>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

@@ -203,7 +203,12 @@ const MovieNote = (props) => {
       </div>
       <div className="info-container">
         <div id="button-container-id" className="button-container">
-          <Link to={"/search?titleMovie=" + props.title_movie}>
+          <Link
+            to={
+              props.title_movie
+                ? "/search?titleMovie=" + props.title_movie
+                : "/profile"
+            }>
             <div className="button-close">
               <span className="material-icons">clear</span>
             </div>

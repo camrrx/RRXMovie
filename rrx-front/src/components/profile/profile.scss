@@ -12,16 +12,6 @@
       padding-left: 1rem;
       padding-top: 1rem;
     }
-    .title-container {
-      display: flex;
-      align-items: center;
-
-      .title-rrx {
-        font-size: 3rem;
-        color: rgb(121, 8, 59);
-        font-family: "Secular One", sans-serif;
-      }
-    }
   }
 
   .classement-container {
@@ -32,6 +22,11 @@
     height: 100%;
 
     .movies-rated-container {
+      background: linear-gradient(
+        90deg,
+        rgba(121, 8, 59, 0.8) 30%,
+        rgba(7, 15, 74, 0.6) 100%
+      );
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -53,9 +48,19 @@
         color: white;
         font-family: "Secular one" sans-serif;
         font-weight: bold;
-        font-size: 2rem;
-        z-index: 10;
+        font-size: 1.5rem;
       }
     }
+  }
+  .movie-note {
+    position: absolute;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.4);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    top: 0;
   }
 }
