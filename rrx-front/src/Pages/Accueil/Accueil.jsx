@@ -10,6 +10,7 @@ const Accueil = () => {
 	const getPopularMoviesFromTmdb = async () => {
 		await getPopularMovies().then(movie => {
 			setPopularMovies(movie.results);
+			setMovieClicked(movie.results[0]);
 		});
 	};
 
@@ -39,7 +40,7 @@ const Accueil = () => {
 			</div>
 
 			<div>
-				{movieClicked ? (
+				{movieClicked && (
 					<div className="cards-popular-movies__description">
 						<img
 							className="cards-popular-movies__description__img"
@@ -61,19 +62,6 @@ const Accueil = () => {
 							</h4>
 						</div>
 					</div>
-				) : (
-					popularMovies && (
-						<div className="cards-popular-movies__description">
-							<img
-								className="cards-popular-movies__description__img"
-								src={
-									"https://image.tmdb.org/t/p/original/" +
-									popularMovies[0].backdrop_path
-								}
-								alt=""
-							/>
-						</div>
-					)
 				)}
 			</div>
 		</div>
