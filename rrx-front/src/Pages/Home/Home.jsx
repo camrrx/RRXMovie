@@ -1,21 +1,21 @@
 //Stateless Functional Component (scf to create easily the function)
-import "./home.scss";
+import "./Home.scss";
 import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import background from "../../img/jungleBook.jpeg";
-import LoginButton from "../loginButton/loginButton";
-import logo from "../../img/rrxLogoWhite.png";
+import Header from "../../components/header/Header";
+import BottomMenu from "../../components/BottomMenu/BottomMenu";
 
 const Home = () => {
 	const dispatch = useDispatch();
 	const [research, setResearch] = useState("");
 	const navigate = useNavigate();
 
-	const handleResearch = (event) => {
+	const handleResearch = event => {
 		setResearch(event.target.value);
 	};
-	const searchFromKey = (event) => {
+	const searchFromKey = event => {
 		if (event.key === "Enter") {
 			navigate("/search?titleMovie=" + research);
 		}
@@ -26,26 +26,9 @@ const Home = () => {
 			className="home-container"
 			style={{
 				backgroundImage: `url(${background})`,
-			}}
-		>
+			}}>
 			<div className="background-home-container">
-				<div className="header-container">
-					<div className="title-container">
-						<div>
-							<img className="logo-rrx" src={logo} alt="" />{" "}
-						</div>
-
-						<div className="text-movie">
-							<p>
-								<small>The</small> Movie Ratings App
-							</p>
-						</div>
-					</div>
-
-					<div className="header-end">
-						<LoginButton />
-					</div>
-				</div>
+				<Header />
 				<div className="search-home-container">
 					<input
 						placeholder="Interstellar, Avatar ..."
@@ -55,7 +38,7 @@ const Home = () => {
 						autoComplete="off"
 						type="text"
 						onChange={handleResearch}
-						onKeyPress={(e) => searchFromKey(e)}
+						onKeyPress={e => searchFromKey(e)}
 						required
 					/>
 					<Link
@@ -67,8 +50,7 @@ const Home = () => {
 								type: "movieResearch/getMovie",
 								payload: { research },
 							});
-						}}
-					>
+						}}>
 						<span className="material-icons">search</span>
 					</Link>
 				</div>

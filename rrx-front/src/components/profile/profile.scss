@@ -1,66 +1,47 @@
 .profile-container {
-  height: 95vh;
+	height: 95vh;
 
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	.classement-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		height: 100%;
 
-    .logo-rrx {
-      display: flex;
-      height: 45px;
-      padding-left: 1rem;
-      padding-top: 1rem;
-    }
-  }
+		.movies-rated-container {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 10vh;
+			width: 80vw;
+			padding: 5px;
+			margin: 10px;
+			box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+				rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+			border-radius: 8px;
 
-  .classement-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-
-    .movies-rated-container {
-      background: linear-gradient(
-        90deg,
-        rgba(121, 8, 59, 0.8) 30%,
-        rgba(7, 15, 74, 0.6) 100%
-      );
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 10vh;
-      width: 50vw;
-      padding: 5px;
-      margin: 12px;
-      border: 0px solid rgba(128, 128, 128, 0.315);
-      box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-      border-radius: 8px;
-
-      .picture-movie-div {
-        position: fixed;
-        border-radius: 8px;
-        z-index: -10;
-      }
-      .movie-name {
-        color: white;
-        font-family: "Secular one" sans-serif;
-        font-weight: bold;
-        font-size: 1.5rem;
-      }
-    }
-  }
-  .movie-note {
-    position: absolute;
-    z-index: 3;
-    background-color: rgba(0, 0, 0, 0.4);
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    top: 0;
-  }
+			.picture-movie-div {
+				position: fixed;
+				border-radius: 8px;
+				z-index: -10;
+			}
+			.movie-name {
+				color: white;
+				font-family: "Secular one" sans-serif;
+				font-weight: bold;
+				font-size: 1.5rem;
+			}
+		}
+	}
+	.movie-note {
+		position: absolute;
+		z-index: 3;
+		background-color: rgba(0, 0, 0, 0.4);
+		height: 100vh;
+		width: 100vw;
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		top: 0;
+	}
 }

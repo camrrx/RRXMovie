@@ -1,110 +1,110 @@
 .search-container {
-  height: 100px;
-  width: 100%;
+	height: 100px;
+	width: 100%;
 
-  .header-container {
-    width: 100%;
-    border: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	.header-container {
+		width: 100%;
+		border: none;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 
-    .logo-rrx {
-      display: flex;
-      height: 45px;
-      padding-left: 1rem;
-      padding-top: 1rem;
-    }
-    .title-container {
-      display: flex;
-      align-items: center;
-      gap: 0rem;
-      .title-rrx {
-        margin: 0;
-        font-size: 3rem;
-        color: rgb(121, 8, 59);
-        font-family: "Secular One", sans-serif;
-        cursor: pointer;
-      }
-      .text-movie {
-        padding-top: 1rem;
-      }
+		.logo-rrx {
+			display: flex;
+			height: 45px;
+			padding-left: 1rem;
+			padding-top: 1rem;
+		}
+		.title-container {
+			display: flex;
+			align-items: center;
+			gap: 0rem;
+			.title-rrx {
+				margin: 0;
+				font-size: 3rem;
+				color: rgb(121, 8, 59);
+				font-family: "Secular One", sans-serif;
+				cursor: pointer;
+			}
+			.text-movie {
+				padding-top: 1rem;
+			}
 
-      p {
-        color: black;
-      }
-    }
-    .sign-in {
-      margin-right: 12px;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin-top: 12px;
-    }
-  }
+			p {
+				color: black;
+			}
+		}
+		.sign-in {
+			margin-right: 12px;
+			margin-bottom: 12px;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			margin-top: 12px;
+		}
+	}
 
-  .research-zone {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 20px;
-    .researching {
-      height: 35px;
-      display: flex;
-      background-color: rgb(230, 230, 230);
-      border-radius: 40px;
-      border: none;
-      padding-inline-start: 1.5rem;
-      box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
-      outline: none;
-    }
-    .button-search {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      border: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: 0.4s;
-      background: linear-gradient(
-        90deg,
-        rgba(121, 8, 59, 1) 10%,
-        rgba(7, 15, 74, 1) 100%
-      );
-      color: white;
-      cursor: pointer;
-    }
+	.research-zone {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 20px;
+		.researching {
+			height: 35px;
+			display: flex;
+			background-color: rgb(230, 230, 230);
+			border-radius: 40px;
+			border: none;
+			padding-inline-start: 1.5rem;
+			box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+			outline: none;
+		}
+		.button-search {
+			height: 40px;
+			width: 40px;
+			border-radius: 50%;
+			border: none;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			transition: 0.4s;
+			background: linear-gradient(
+				90deg,
+				rgba(121, 8, 59, 1) 10%,
+				rgba(7, 15, 74, 1) 100%
+			);
+			color: white;
+			cursor: pointer;
+		}
 
-    .button-search:hover {
-      transition: 0.4s;
-      background: linear-gradient(
-        90deg,
-        rgba(121, 8, 59, 1) 50%,
-        rgba(7, 15, 74, 1) 100%
-      );
-      color: white;
-      transform: rotate(90deg);
-    }
-  }
-  @media (max-width: 830px) {
-    .text-movie {
-      display: none;
-    }
+		.button-search:hover {
+			transition: 0.4s;
+			background: linear-gradient(
+				90deg,
+				rgba(121, 8, 59, 1) 50%,
+				rgba(7, 15, 74, 1) 100%
+			);
+			color: white;
+			transform: rotate(90deg);
+		}
+	}
+	@media (max-width: 830px) {
+		.text-movie {
+			display: none;
+		}
 
-    .sign-in {
-      width: 15%;
-      margin-right: none;
-      padding-top: 1rem;
-    }
-  }
-  @media (max-width: 500px) {
-    .header-container {
-      .logo-rrx {
-        height: 25px;
-      }
-    }
-  }
+		.sign-in {
+			width: 15%;
+			margin-right: none;
+			padding-top: 1rem;
+		}
+	}
+	@media (max-width: 500px) {
+		.header-container {
+			.logo-rrx {
+				height: 25px;
+			}
+		}
+	}
 }
