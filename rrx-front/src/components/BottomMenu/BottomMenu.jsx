@@ -9,20 +9,19 @@ const BottomMenu = () => {
 
 	return (
 		<>
-			{usernameLogin && (
-				<div className="bottomMenu-container">
-					<Link to={"/accueil"}>
-						<AiTwotoneHome className="icon-bottomMenu" />
-					</Link>
-					<Link to={"/home"}>
-						<FaSearch className="icon-bottomMenu" />
-					</Link>
-
+			<div className="bottomMenu-container">
+				<Link to={"/accueil"}>
+					<AiTwotoneHome className="icon-bottomMenu" />
+				</Link>
+				<Link to={"/home"}>
+					<FaSearch className="icon-bottomMenu" />
+				</Link>
+				{usernameLogin && (
 					<Link to={"/profile?user=" + usernameLogin}>
 						<FaUserAlt className="icon-bottomMenu" />
 					</Link>
-				</div>
-			)}
+				)}
+			</div>
 		</>
 	);
 };
