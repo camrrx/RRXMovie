@@ -1,7 +1,8 @@
 import "./Accueil.scss";
 import { getPopularMovies } from "../../API/tmdbApi";
 import { useEffect, useState } from "react";
-import Header from "../../components/header/Header";
+import { Link } from "react-router-dom";
+import logo from "../../img/rrxLogoWhite.png";
 
 const Accueil = () => {
 	const [popularMovies, setPopularMovies] = useState();
@@ -23,6 +24,13 @@ const Accueil = () => {
 	};
 	return (
 		<div>
+			<div className="title-container">
+				<Link to="/home">
+					<div>
+						<img className="logo-rrx" src={logo} alt="" />
+					</div>
+				</Link>
+			</div>
 			<div className="cards-popular-movies">
 				{popularMovies &&
 					popularMovies.map(movie => (

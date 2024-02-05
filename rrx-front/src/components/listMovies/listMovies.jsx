@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./listMovies.scss";
 import MovieNote from "../movieNote/movieNote";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
-export const ListMovies = (props) => {
+export const ListMovies = props => {
 	const [movies, setMovies] = useState({});
-	const title_movie = new URLSearchParams(useLocation().search).get("titleMovie");
+	const title_movie = new URLSearchParams(useLocation().search).get(
+		"titleMovie"
+	);
 	const movie_id = new URLSearchParams(useLocation().search).get("movie_id");
 
 	const dispatch = useDispatch();
@@ -27,7 +29,7 @@ export const ListMovies = (props) => {
 
 	/*Get the movies with a poster*/
 	const filmCover = () => {
-		return movies.filter((movie) => {
+		return movies.filter(movie => {
 			return movie.poster_path;
 		});
 	};
@@ -36,13 +38,19 @@ export const ListMovies = (props) => {
 		<div>
 			<div className="movies-list" id="listMovies">
 				{movies.length ? (
-					filmCover().map((movie) => (
-						<Link key={movie.id} to={"/search?titleMovie=" + title_movie + "&movie_id=" + movie.id}>
+					filmCover().map(movie => (
+						<Link
+							key={movie.id}
+							to={
+								"/search?titleMovie=" + title_movie + "&movie_id=" + movie.id
+							}>
 							<div className="card">
 								<div className="poster-container">
 									<img
 										className="poster-path"
-										src={"https://image.tmdb.org/t/p/original/" + movie.poster_path}
+										src={
+											"https://image.tmdb.org/t/p/original/" + movie.poster_path
+										}
 										alt=""
 									/>
 								</div>
@@ -59,8 +67,7 @@ export const ListMovies = (props) => {
 											// 	payload: true,
 											// });
 										}}
-										className="button-select"
-									>
+										className="button-select">
 										{movie.title}
 									</button>
 								</div>
@@ -76,7 +83,9 @@ export const ListMovies = (props) => {
 				//If isDisplay is true, display the MovieNote component related to the movie selected
 				movie_id ? (
 					<div className="movie-note">
-						<MovieNote movie_id={movie_id} title_movie={title_movie}></MovieNote>
+						<MovieNote
+							movie_id={movie_id}
+							title_movie={title_movie}></MovieNote>
 					</div>
 				) : (
 					""

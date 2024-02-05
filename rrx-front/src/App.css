@@ -3,7 +3,6 @@
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
-	overflow: hidden;
 	width: 100vw;
 	height: 100vh;
 }

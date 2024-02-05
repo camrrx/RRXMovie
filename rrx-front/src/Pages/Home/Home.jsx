@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import background from "../../img/jungleBook.jpeg";
 import Header from "../../components/header/Header";
-import BottomMenu from "../../components/BottomMenu/BottomMenu";
 
 const Home = () => {
 	const dispatch = useDispatch();
