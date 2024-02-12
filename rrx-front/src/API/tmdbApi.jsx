@@ -76,3 +76,45 @@ export const getPopularMovies = async () => {
 		console.log(e);
 	}
 };
+
+export const getTopRatedMovies = async () => {
+	try {
+		let res = await axios.get(
+			`${API_URL}/movie/top_rated?${API_KEY}&language=fr-FR`,
+			options
+		);
+		console.log(res.data);
+
+		return res.data;
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+export const getNowPlayingMovies = async () => {
+	try {
+		let res = await axios.get(
+			`${API_URL}/movie/now_playing?${API_KEY}&language=fr-FR`,
+			options
+		);
+		console.log(res.data);
+
+		return res.data;
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+export const getUpComingMovies = async () => {
+	try {
+		let res = await axios.get(
+			`${API_URL}/movie/upcoming?${API_KEY}&language=fr-FR`,
+			options
+		);
+		console.log(res.data);
+
+		return res.data;
+	} catch (e) {
+		console.log(e);
+	}
+};

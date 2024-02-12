@@ -1,23 +1,54 @@
 import "./Accueil.scss";
-import { getPopularMovies } from "../../API/tmdbApi";
+import {
+	getTopRatedMovies,
+	getNowPlayingMovies,
+	getUpComingMovies,
+} from "../../API/tmdbApi";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import logo from "../../img/rrxLogoWhite.png";
+import { RadioGroupBasic } from "../../componentsBasic/RadioGroup/RadioGroup";
 
 const Accueil = () => {
-	const [popularMovies, setPopularMovies] = useState();
-	const [movieClicked, setMovieClicked] = useState();
+	const [moviesToDisplay, setMoviesToDisplay] = useState();
 
-	const getPopularMoviesFromTmdb = async () => {
-		await getPopularMovies().then(movie => {
-			setPopularMovies(movie.results);
+	const [movieClicked, setMovieClicked] = useState();
+	const [selectedTab, setSelectedTab] = useState("value1");
+
+	const getTopRatedMoviesFromTmdb = async () => {
+		await getTopRatedMovies().then(movie => {
+			console.log(movie);
+			setMoviesToDisplay(movie.results);
+			setMovieClicked(movie.results[0]);
+		});
+	};
+	const getNowPlayingMoviesFromTmdb = async () => {
+		await getNowPlayingMovies().then(movie => {
+			setMoviesToDisplay(movie.results);
+			setMovieClicked(movie.results[0]);
+		});
+	};
+
+	const getUpComingMoviesFromTmdb = async () => {
+		await getUpComingMovies().then(movie => {
+			setMoviesToDisplay(movie.results);
 			setMovieClicked(movie.results[0]);
 		});
 	};
 
 	useEffect(() => {
-		getPopularMoviesFromTmdb();
-	}, []);
+		switch (selectedTab) {
+			case "value1":
+				getUpComingMoviesFromTmdb();
+				break;
+			case "value2":
+				getNowPlayingMoviesFromTmdb();
+				break;
+			case "value3":
+				getTopRatedMoviesFromTmdb();
+				break;
+			default:
+				break;
+		}
+	}, [selectedTab]);
 
 	const getMovieClicked = movie => {
 		setMovieClicked(movie);
@@ -25,28 +56,23 @@ const Accueil = () => {
 	return (
 		<div>
 			<div className="title-container">
-				<Link to="/home">
-					<div>
-						<img className="logo-rrx" src={logo} alt="" />
-					</div>
-				</Link>
+				<RadioGroupBasic onValueChange={newValue => setSelectedTab(newValue)} />
 			</div>
 			<div className="cards-popular-movies">
-				{popularMovies &&
-					popularMovies.map(movie => (
+				{moviesToDisplay &&
+					moviesToDisplay.map(movie => (
 						<div
 							className="cards-popular-movies__card"
 							key={movie.id}
 							onClick={() => getMovieClicked(movie)}>
 							<img
-								className="cards-popular-movies__movies__card__poster_path"
+								className="cards-popular-movies__card__poster-path"
 								src={"https://image.tmdb.org/t/p/original/" + movie.poster_path}
 								alt=""
 							/>
 						</div>
 					))}
 			</div>
-
 			<div>
 				{movieClicked && (
 					<div className="cards-popular-movies__description">

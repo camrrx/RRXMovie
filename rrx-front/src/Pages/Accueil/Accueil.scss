@@ -3,17 +3,18 @@
 	overflow-x: scroll;
 	gap: 10px;
 	padding: 10px;
+
 	&__card {
 		display: flex;
 		justify-content: center;
-		height: 60vh;
+		height: 50vh;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+		border-radius: 12px;
 
-		&__poster_path {
-			width: 100%;
+		&__poster-path {
 			height: auto;
 			display: block;
-			border-radius: 20px;
+			border-radius: 12px;
 		}
 	}
 
@@ -70,11 +71,14 @@
 
 .title-container {
 	display: flex;
-	justify-content: end;
+	justify-content: center;
 	align-items: center;
+	margin: 15px;
 
 	.logo-rrx {
-		display: flex;
+		position: fixed;
+		right: 0;
+		top: 0;
 		height: 25px;
 		padding-left: 1rem;
 		padding-top: 1rem;
