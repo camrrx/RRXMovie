@@ -8,13 +8,10 @@
 		display: flex;
 		justify-content: center;
 		height: 50vh;
-		width: auto;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 		border-radius: 12px;
 
 		&__poster-path {
-			height: auto;
-			display: block;
 			border-radius: 12px;
 		}
 	}
@@ -39,7 +36,7 @@
 			align-items: center;
 			width: 100%;
 			padding-inline: 16px;
-			height: 30vh;
+			height: 35vh;
 			margin: 0;
 
 			h1,
@@ -75,14 +72,4 @@
 	justify-content: center;
 	align-items: center;
 	margin: 15px;
-
-	.logo-rrx {
-		position: fixed;
-		right: 0;
-		top: 0;
-		height: 25px;
-		padding-left: 1rem;
-		padding-top: 1rem;
-		opacity: 0.6;
-	}
 }
