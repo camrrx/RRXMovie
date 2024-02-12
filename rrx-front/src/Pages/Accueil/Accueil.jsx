@@ -15,7 +15,6 @@ const Accueil = () => {
 
 	const getTopRatedMoviesFromTmdb = async () => {
 		await getTopRatedMovies().then(movie => {
-			console.log(movie);
 			setMoviesToDisplay(movie.results);
 			setMovieClicked(movie.results[0]);
 		});

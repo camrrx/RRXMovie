@@ -10,14 +10,12 @@ const Header = () => {
 			<div className="title-container">
 				<Link to="/home">
 					<div>
-						<img className="logo-rrx" src={logo} alt="" />
+						<img className="logo-rrx-home" src={logo} alt="" />
 					</div>
 				</Link>
 			</div>
 
-			<div className="header-end">
-				<LoginButton />
-			</div>
+			<LoginButton />
 		</div>
 	);
 };
